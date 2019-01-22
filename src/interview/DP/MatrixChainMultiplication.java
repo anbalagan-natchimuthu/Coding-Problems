@@ -13,6 +13,9 @@ package interview.DP;
  *
  * https://www.geeksforgeeks.org/matrix-chain-multiplication-dp-8/
  * https://www.youtube.com/watch?v=vgLJZMUfnsU
+ *
+ * Time Complexity: O(n^3)
+ * Auxiliary Space: O(n^2)
  */
 public class MatrixChainMultiplication {
 

@@ -10,33 +10,57 @@ import java.util.TreeMap;
  *
  */
 public class PrintTreeView {
+    static int  max_level = 0;
 
     public static void main(String[] args) {
-        /* Create following Binary Tree
+        /* Create following Binary Tree For Left View
              1
            /  \
           2    3
-           \
-            4
-             \
-              5
-               \
-                6*/
+           \    \
+            4    6
+           /     /
+          5     7
+               /
+              8
+                */
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
         root.left.right = new Node(4);
-        root.left.right.right = new Node(5);
-        root.left.right.right.right = new Node(6);
+        root.left.right.left = new Node(5);
+        root.right.right = new Node(6);
+        root.right.right.left = new Node(7);
+        root.right.right.left.left = new Node(8);
         PrintTreeView t = new PrintTreeView();
-        System.out.println("****** Following are nodes in Right view of Binary Tree *****");
-        t.rightView(root);
+
+        System.out.println("****** Following are nodes in Left view of Binary Tree *****");
+        t.leftView(root, 1);
+        System.out.println();
 
         System.out.println("****** Following are nodes in Top view of Binary Tree *****");
         t.printTopView(root);
 
-        System.out.println("****** Following are nodes in Left view of Binary Tree *****");
-        t.leftView(root);
+         /* Create following Binary Tree For Left View
+             1
+           /  \
+          2    3
+           \    \
+            4    6
+           /
+          5
+                */
+
+        Node root1 = new Node(1);
+        root1.left = new Node(2);
+        root1.right = new Node(3);
+        root1.left.right = new Node(4);
+        root1.left.right.left = new Node(5);
+        root1.right.right = new Node(6);
+
+        System.out.println("****** Following are nodes in Right view of Binary Tree *****");
+        t.rightView(root1);
+
     }
 
     // Recursive function to print right view of a binary tree.
@@ -112,24 +136,20 @@ public class PrintTreeView {
         System.out.println();
     }
 
-    private void leftView(Node root) {
+    private void leftView(Node root, int level) {
+        // Base Case
         if (root == null) {
             return;
         }
-
-        Queue<Node> que = new LinkedList<>();
-        que.add(root);
-        while (!que.isEmpty()) {
-            Node temp = que.remove();
-            System.out.print(temp.getData() + "  ");
-
-            if (temp.getLeft() != null) {
-                que.add(temp.getLeft());
-            } else {
-                if (temp.getRight() != null) {
-                    que.add(temp.getRight());
-                }
-            }
+        // If this is the first node of its level
+        if (max_level < level)
+        {
+            System.out.print(" " + root.getData());
+            max_level = level;
         }
+        leftView(root.getLeft(), level + 1);
+        leftView(root.getRight(), level + 1);
     }
+
+
 }

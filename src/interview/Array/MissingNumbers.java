@@ -1,9 +1,11 @@
 package interview.Array;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 /**
@@ -11,25 +13,30 @@ import java.util.Set;
  */
 
 /**
- * find missing elements in an area of 100 integers, which contains numbers between 1 and 100.
- * But it's not in sequence
+ * find missing elements in an area of 100 integers, which contains numbers between 1 and 100. But it's not in sequence
  */
 public class MissingNumbers {
+
     public static void main(String[] args) {
         new MissingNumbers().findMissingAndDuplicateNumber(new int[] { 1, 4, 3, 3 }, 5);
         new MissingNumbers().findMissingNumber(new int[] { 1, 4, 3 }, 5);
         new MissingNumbers().findDuplicateNumbers(new int[] { 1, 4, 3, 3 });
+        new MissingNumbers().missingNumbers(new int[] { 10, 8, 12 });
     }
 
     /**
-     * Using HashMap
-     * @param inputArray
-     * @param arrayLength
+     * Space Complexity : O(n) Using HashMap
      */
     void findMissingAndDuplicateNumber(int[] inputArray, int arrayLength) {
         HashMap<Integer, Integer> storage = new HashMap<>();
         for (int number : inputArray) {
-            storage.put(number, storage.get(number) == null ? 1 : storage.get(number) + 1);
+            storage.compute(number, (key, value) -> {
+                if (value == null) {
+                    return 1;
+                } else {
+                    return value + 1;
+                }
+            });
         }
 
         ArrayList<Integer> missingNumbers = new ArrayList<>();
@@ -46,9 +53,7 @@ public class MissingNumbers {
     }
 
     /**
-     * Using BitSet
-     * @param inputArray
-     * @param arrayLength
+     * Space Complexity : O(n) Using BitSet
      */
     void findMissingNumber(int[] inputArray, int arrayLength) {
         BitSet storage = new BitSet(arrayLength);
@@ -68,14 +73,54 @@ public class MissingNumbers {
 
     /**
      * Using Set
-     * @param inputArray
      */
-    <T>  void findDuplicateNumbers(int[] inputArray) {
+    <T> void findDuplicateNumbers(int[] inputArray) {
         Set<Integer> storage = new HashSet<>(inputArray.length);
         System.out.print("duplicateNumbers::");
         for (int number : inputArray) {
             if (!storage.add(number)) {
                 System.out.print(number + "   ");
+            }
+        }
+    }
+
+    /**
+     * PROBLEM : 2 Find missing numbers
+     * <p>
+     * https://www.geeksforgeeks.org/find-four-missing-numbers-array-containing-elements-1-n/
+     */
+
+    private void missingNumbers(int[] arr) {
+        int minNumber = Arrays.stream(arr).min().orElseThrow(NoSuchElementException::new);
+        int maxNumber = Arrays.stream(arr).max().orElseThrow(NoSuchElementException::new);
+
+        int[] helper = new int[maxNumber - minNumber - arr.length + 1];
+
+        for (int i = 0; i < arr.length; i++) {
+            int temp = Math.abs(arr[i]);
+
+            // If element is smaller than or equal to length, mark its presence in arr[]
+            int indexVal = temp - minNumber;
+            if (indexVal <= arr.length) {
+                arr[indexVal] *= (-1);
+            }
+
+            // Mark presence in helper[]
+            else if (indexVal > arr.length) {
+                helper[indexVal - arr.length] = -1;
+            }
+        }
+
+        System.out.print("\nMissing Numbers without Additional space :: ");
+        // Print all those elements whose presence is not marked.
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > 0) {
+                System.out.print(i + minNumber + " ");
+            }
+        }
+        for (int i = 0; i < helper.length; i++) {
+            if (helper[i] >= 0) {
+                System.out.print(arr.length + minNumber + " ");
             }
         }
     }
