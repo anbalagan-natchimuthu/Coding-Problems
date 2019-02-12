@@ -8,6 +8,7 @@ import java.util.LinkedList;
  * Created by 212438472 on 4/1/18.
  */
 public class BFSandDFS {
+
     private static HashMap<Integer, Node> nodeLookup = new HashMap<>();
 
     public static void main(String[] args) {
@@ -19,22 +20,28 @@ public class BFSandDFS {
         bfSandDFS.addNode(50);
         bfSandDFS.addNode(20);
         bfSandDFS.addNode(70);
+        bfSandDFS.addNode(80);
+        bfSandDFS.addNode(90);
 
         bfSandDFS.addEdge(30, 40);
         bfSandDFS.addEdge(40, 20);
         bfSandDFS.addEdge(10, 40);
         bfSandDFS.addEdge(40, 10);
         bfSandDFS.addEdge(10, 50);
+        bfSandDFS.addEdge(10, 50);
+        bfSandDFS.addEdge(10, 80);
+        bfSandDFS.addEdge(80, 90);
         bfSandDFS.addEdge(50, 70);
 
         System.out.println(bfSandDFS.hasPathDFS(30, 70));
 
         System.out.println(bfSandDFS.hasPathBFS(30, 70));
-
     }
 
     public static class Node {
+
         private int id;
+
         LinkedList<Node> adjacent = new LinkedList();
 
         private Node(int id) {

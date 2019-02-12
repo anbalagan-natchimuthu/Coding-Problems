@@ -1,89 +1,71 @@
-package matrix;
+package interview.Matrix;
 
+/**
+ * https://www.youtube.com/watch?v=T8ErAYobcbc
+ */
 public class DiagonalMatrixPrint {
 
     public static void main(String[] args) {
-        int[][] mat =
-            { { 1, 2, 3, 4 },
-            { 5, 6, 7, 8 },
-            { 9, 10, 11, 12 },
-            { 13, 14, 15, 16 } };
-        //printDiagonal(mat, 4, 4);
-        printZigZag(mat, 4, 4);
+        int[][] mat = {
+                        { 1, 2, 3, 4 },
+                        { 5, 6, 7, 8 },
+                        { 9, 10, 11, 12 },
+                        { 13, 14, 15, 16 }
+                    };
+        printDiagonal(mat);
+        System.out.println("\n\n");
+        printDiagonal1(mat);
     }
 
-    public static void printDiagonal(int[][] mat, int m, int n) {
+    public static void printDiagonal(int[][] mat) {
 
-        for (int k = 0; k < m; k++) {
-
+        for (int k = 0; k < mat.length; k++) {
             int i = k;
             int j = 0;
-            while (i >= 0 && j < n) {
-                System.out.println(mat[i][j]);
+            while (i >= 0) {
+                System.out.print(mat[i][j] + " ");
                 i--;
                 j++;
             }
+            System.out.println();
         }
 
-        for (int k = 1; k < n; k++) {
-
+        for (int k = 1; k < mat[0].length; k++) {
+            int i = mat.length - 1;
             int j = k;
-            int i = m - 1;
-            while (i >= 0 && j < n) {
-                System.out.println(mat[i][j]);
+            while (j < mat[0].length) {
+                System.out.print(mat[i][j] + " ");
                 i--;
                 j++;
             }
+            System.out.println();
         }
     }
 
-    private static void printZigZag(int[][] mat, int m, int n) {
+    private static void printDiagonal1(int[][] mat) {
 
-        boolean zigzag = false;
+        for (int k = 0; k < mat[0].length; k++) {
 
-        for (int k = 0; k < m; k++) {
-
-            int i = k;
-            int j = 0;
-            while (i >= 0 && j < n) {
-                if (!zigzag) {
-                    System.out.println(mat[i][j]);
-                    i--;
-                    j++;
-                }
-
-                if (zigzag) {
-                    System.out.println(mat[j][i]);
-                    i--;
-                    j++;
-                }
+            int i = 0;
+            int j = k;
+            while (j >= 0) {
+                System.out.print(mat[i][j] + " ");
+                i++;
+                j--;
             }
-            zigzag = (zigzag == true) ? false : true;
+            System.out.println();
         }
 
-        for (int k = 1; k < n; k++) {
+        for (int k = 1; k < mat.length; k++) {
 
-            int j = k;
-            int i = m - 1;
-            while (i >= 0 && j < n) {
-                if (!zigzag) {
-                    System.out.println(mat[i][j]);
-                    i--;
-                    j++;
-                }
-                if (zigzag) {
-                    System.out.println(mat[j][i]);
-
-                    i--;
-                    j++;
-                }
+            int i = k;
+            int j = mat[0].length - 1;
+            while (i < mat.length) {
+                System.out.print(mat[i][j] + " ");
+                i++;
+                j--;
             }
-            zigzag = (zigzag == true) ? false : true;
+            System.out.println();
         }
     }
 }
-
-// Inorder pre ,post, dfs,bfs
-// Given a tree find the level
-//Print in reverse order
-//

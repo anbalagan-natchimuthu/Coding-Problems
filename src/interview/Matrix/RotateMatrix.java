@@ -3,10 +3,11 @@ package interview.Matrix;
 import java.util.Arrays;
 
 /**
- * Rotate Matrix Clockwise and Anti-clockwise With / without additional space.
- * https://www.geeksforgeeks.org/inplace-rotate-square-matrix-by-90-degrees/
+ * Rotate Matrix Clockwise and Anti-clockwise With / without additional space. https://www.geeksforgeeks
+ * .org/inplace-rotate-square-matrix-by-90-degrees/
  */
 public class RotateMatrix {
+
     private static int[][] rotateMatrixClockwise90Degree(int[][] inputMatrix) {
         int rows = inputMatrix.length;
         int cols = inputMatrix[0].length;
@@ -92,8 +93,7 @@ public class RotateMatrix {
 
     //https://www.geeksforgeeks.org/rotate-matrix-90-degree-without-using-extra-space-set-2/
     // Function to anticlockwise rotate matrix by 90 degree
-    static int[][] rotate90(int arr[][])
-    {
+    static int[][] rotate90(int arr[][]) {
         //There are two steps :
 
         //1.Find transpose of matrix.
@@ -109,46 +109,39 @@ public class RotateMatrix {
     // After transpose we swap elements of
     // column one by one for finding left
     // rotation of matrix by 90 degree
-    static void reverseColumns(int arr[][])
-    {
-        for (int i = 0; i < arr[0].length; i++)
-            for (int j = 0,  k = arr[0].length - 1;
-                j < k; j++, k--)
-            {
+    static void reverseColumns(int arr[][]) {
+        for (int i = 0; i < arr[0].length; i++) {
+            for (int j = 0, k = arr[0].length - 1; j < k; j++, k--) {
                 int temp = arr[j][i];
                 arr[j][i] = arr[k][i];
                 arr[k][i] = temp;
             }
+        }
     }
 
-
     // Function for do transpose of matrix
-    static void transpose(int arr[][])
-    {
-        for (int i = 0; i < arr.length; i++)
-            for (int j = i; j < arr[0].length; j++)
-            {
-                int temp = arr[j][i];
-                arr[j][i] = arr[i][j];
-                arr[i][j] = temp;
+    static void transpose(int arr[][]) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i; j < arr[0].length; j++) {
+                int temp = arr[i][j];
+                arr[i][j] = arr[j][i];
+                arr[j][i] = temp;
             }
+        }
     }
 
     // Function for print matrix
-    static void printMatrix(int arr[][])
-    {
-        for (int i = 0; i < arr.length; i++)
-        {
-            for (int j = 0; j < arr[0].length; j++)
+    static void printMatrix(int arr[][]) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[0].length; j++) {
                 System.out.print(arr[i][j] + " ");
+            }
             System.out.println("");
-
         }
     }
 
     /**
-     * Given a matrix, clockwise rotate elements in it.
-     * https://www.geeksforgeeks.org/rotate-matrix-elements/
+     * Given a matrix, clockwise rotate elements in it. https://www.geeksforgeeks.org/rotate-matrix-elements/
      */
     private static int[][] rotateMatrix(int[][] arr) {
         int rowStarting = 0, rowEnding = arr.length, columnStarting = 0, columnEnding = arr[0].length;
@@ -164,22 +157,22 @@ public class RotateMatrix {
             prevElement = arr[rowStarting + 1][columnStarting];
 
             // Move elements of first row from the remaining rows
-            for (int i = columnStarting; i <columnEnding; i++) {
+            for (int i = columnStarting; i < columnEnding; i++) {
                 currentElement = arr[rowStarting][i];
                 arr[rowStarting][i] = prevElement;
                 prevElement = currentElement;
             }
 
-            rowStarting ++;
+            rowStarting++;
 
             // Move elements of last column from the remaining columns
-            for (int i = rowStarting; i <rowEnding; i++) {
-                currentElement = arr[i][columnEnding -1];
-                arr[i][columnEnding -1] = prevElement;
+            for (int i = rowStarting; i < rowEnding; i++) {
+                currentElement = arr[i][columnEnding - 1];
+                arr[i][columnEnding - 1] = prevElement;
                 prevElement = currentElement;
             }
 
-            columnEnding --;
+            columnEnding--;
 
             if (rowStarting < rowEnding) {
                 // Move elements of last row from the remaining rows
@@ -190,7 +183,7 @@ public class RotateMatrix {
                 }
             }
 
-            rowEnding --;
+            rowEnding--;
 
             if (columnStarting < columnEnding) {
                 // Move elements of last row from the remaining rows
@@ -201,22 +194,15 @@ public class RotateMatrix {
                 }
             }
 
-            columnStarting ++;
-
+            columnStarting++;
         }
         return arr;
     }
 
     public static void main(String args[]) {
 
-        final int matrix[][] = {
-            { 1,  2,  3,  4,   5,  6 },
-            { 7,  8,  9,  10, 11, 12 },
-            {13, 14, 15,  16, 17, 18 },
-            {19, 20, 21,  22, 23, 24 },
-            {25, 26, 27,  28, 29, 30 },
-            {31, 32, 33,  34, 35, 36 }
-        };
+        final int matrix[][] = { { 1, 2, 3, 4, 5, 6 }, { 7, 8, 9, 10, 11, 12 }, { 13, 14, 15, 16, 17, 18 },
+            { 19, 20, 21, 22, 23, 24 }, { 25, 26, 27, 28, 29, 30 }, { 31, 32, 33, 34, 35, 36 } };
 
         System.out.println("******************************************");
         System.out.println("** ROTATE MATRIX CLOCK-WISE 90 DEGREE ****");
@@ -257,7 +243,6 @@ public class RotateMatrix {
         tempMatrix = deepCopy(matrix);
         result1 = rotate90(tempMatrix);
         displayMatrix(result1);
-
 
         System.out.println("************************************************");
         System.out.println("** ROTATE MATRIX CLOCK-WISE ****");

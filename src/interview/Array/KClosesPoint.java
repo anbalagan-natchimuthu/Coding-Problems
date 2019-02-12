@@ -1,7 +1,6 @@
 package interview.Array;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.PriorityQueue;
 
 /**
@@ -12,17 +11,12 @@ public class KClosesPoint {
 
     public static void main(String[] args) {
         KClosesPoint closesPoint = new KClosesPoint();
-        int[][] points = {
-            { 1, 0 }, { -1, 0 }, { 2, 0 }, { 5, 3 }, { 7, 4 }
-        };
-        List<int[]> closesKPoints = closesPoint.findClosesPoint(points, new int[] { 0, 0 }, 3);
-        System.out.println("********** CLOSES POINTS ***********");
-        closesKPoints.stream().forEach(x -> {
-            System.out.println(x[0] + "::" + x[1]);
-        });
+        int[][] points = { { 1, 0 }, { -1, 0 }, { 2, 0 }, { 5, 3 }, { 7, 4 } };
+        int[][] closesKPoints = closesPoint.findClosesPoint(points, new int[] { 0, 0 }, 3);
+        System.out.println("********** CLOSES POINTS ***********\n\n" + Arrays.deepToString(closesKPoints));
     }
 
-    private List<int[]> findClosesPoint(int[][] points, int[] coordinates, int k) {
+    private int[][] findClosesPoint(int[][] points, int[] coordinates, int k) {
 
         // Max Heap
         PriorityQueue<ClosesPoints> closestPointsQueue = new PriorityQueue<>(k + 1, (c1, c2) -> {
@@ -47,14 +41,6 @@ public class KClosesPoint {
                 return 0;
             }
         });
-        /*for (int[] point : points) {
-            double dist = getDistance(point, coordinates);
-            closestPointsQueue.add(new ClosesPoints(dist, point));
-            System.out.println("dist::" + dist + "::" + point[0] + "::" + point[1]);
-            if (closestPointsQueue.size() > k) {
-                closestPointsQueue.poll();
-            }
-        }*/
 
         for (int[] point : points) {
             double dist = getDistance(point, coordinates);
@@ -68,16 +54,24 @@ public class KClosesPoint {
             }
         }
 
-        List<int[]> returnList = new ArrayList<>();
+        /*List<int[]> returnList = new ArrayList<>();
         while (!closestPointsQueue.isEmpty()) {
             returnList.add(closestPointsQueue.poll().points);
+        }*/
+
+        int[][] returnList = new int[closestPointsQueue.size()][2];
+        int i = 0;
+        while (!closestPointsQueue.isEmpty()) {
+            returnList[i++] = closestPointsQueue.poll().points;
         }
 
         return returnList;
     }
 
     class ClosesPoints {
+
         double dist;
+
         int[] points;
 
         ClosesPoints(double dist, int[] points) {

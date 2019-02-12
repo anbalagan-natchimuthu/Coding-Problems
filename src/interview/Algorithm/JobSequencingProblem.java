@@ -17,17 +17,23 @@ import java.util.TreeSet;
  * Examples:
  * <p>
  * Input: Four Jobs with following deadlines and profits
- * <p>
  * JobID    Deadline      Profit
- * <p>
- * a        4            20 b 1 10 c 1            40 d        1            30
+ * a        4              20
+ * b        1              10
+ * c        1              40
+ * d        1              30
  * <p>
  * Output: Following is maximum profit sequence of jobs c, a
  * <p>
  * Input:  Five Jobs with following deadlines and profits
  * <p>
- * JobID     Deadline     Profit a         2           100 b 1 19 c         2           27 d         1           25 e 3
- * 15 Output: Following is maximum profit sequence of jobs c, a, e
+ * JobID     Deadline     Profit
+ * a         2           100
+ * b         1            19
+ * c         2           27
+ * d         1           25
+ * e         3           15
+ * Output: Following is maximum profit sequence of jobs c, a, e
  */
 // time complexity: O(n2)
 // data structure to store jobs info. Each job has an identifier,
@@ -97,6 +103,8 @@ class Scheduler {
 
     /**
      * https://www.geeksforgeeks.org/job-sequencing-problem-set-3-using-treeset-in-java/
+     * Time Complexity: O(N*log(N))
+     * Auxiliary Space: O(N)
      */
 
     private static void usingTreeSet(List<Jobs> jobs) {
@@ -128,8 +136,16 @@ class Scheduler {
     public static void main(String[] args) {
         // List of given jobs. Each job has an identifier, a deadline and
         // profit associated with it
-        List<Jobs> jobs = Arrays.asList(new Jobs(1, 9, 15), new Jobs(2, 2, 2), new Jobs(3, 5, 18), new Jobs(4, 7, 1),
-            new Jobs(5, 4, 25), new Jobs(6, 2, 20), new Jobs(7, 5, 8), new Jobs(8, 7, 10), new Jobs(9, 4, 12),
+        List<Jobs> jobs = Arrays.asList(
+            new Jobs(1, 9, 15),
+            new Jobs(2, 2, 2),
+            new Jobs(3, 5, 18),
+            new Jobs(4, 7, 1),
+            new Jobs(5, 4, 25),
+            new Jobs(6, 2, 20),
+            new Jobs(7, 5, 8),
+            new Jobs(8, 7, 10),
+            new Jobs(9, 4, 12),
             new Jobs(10, 3, 5));
 
         // stores maximum deadline that can be associated with a job

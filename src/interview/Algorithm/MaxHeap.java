@@ -1,16 +1,16 @@
-package interview.Array;
+package interview.Algorithm;
 
 import java.util.NoSuchElementException;
 
 /**
- * https://codepumpkin.com/heap/
- * https://www.youtube.com/watch?v=t0Cq6tVNRBA
- * Created by 212438472 on 8/11/18.
+ * https://codepumpkin.com/heap/ https://www.youtube.com/watch?v=t0Cq6tVNRBA Created by 212438472 on 8/11/18.
  */
 public class MaxHeap {
 
     private static final int d = 2;
+
     private int[] heap;
+
     private int heapSize;
 
     /**
@@ -19,20 +19,18 @@ public class MaxHeap {
     public MaxHeap(int capacity) {
         heapSize = 0;
         heap = new int[capacity];
-       // Arrays.fill(heap, -1);
+        // Arrays.fill(heap, -1);
     }
 
     /**
-     *  This will check if the heap is empty or not
-     *  Complexity: O(1)
+     * This will check if the heap is empty or not Complexity: O(1)
      */
     public boolean isEmpty() {
         return heapSize == 0;
     }
 
     /**
-     *  This will check if the heap is full or not
-     *  Complexity: O(1)
+     * This will check if the heap is full or not Complexity: O(1)
      */
     public boolean isFull() {
         return heapSize == heap.length;
@@ -47,9 +45,8 @@ public class MaxHeap {
     }
 
     /**
-     *  This will insert new element in to heap
-     *  Complexity: O(log N)
-     *  As worst case scenario, we need to traverse till the root
+     * This will insert new element in to heap Complexity: O(log N) As worst case scenario, we need to traverse till the
+     * root
      */
     public void insert(int x) {
         if (isFull()) {
@@ -61,9 +58,7 @@ public class MaxHeap {
     }
 
     /**
-     *  This will delete element at index x
-     *  Complexity: O(log N)
-     *
+     * This will delete element at index x Complexity: O(log N)
      */
     public int delete(int x) {
         if (isEmpty()) {
@@ -78,8 +73,7 @@ public class MaxHeap {
     }
 
     /**
-     *  This method used to maintain the heap property while inserting an element.
-     *
+     * This method used to maintain the heap property while inserting an element.
      */
     private void heapifyUp(int i) {
         int temp = heap[i];
@@ -91,8 +85,7 @@ public class MaxHeap {
     }
 
     /**
-     *  This method used to maintain the heap property while deleting an element.
-     *
+     * This method used to maintain the heap property while deleting an element.
      */
     private void heapifyDown(int i) {
         int child;
@@ -118,8 +111,7 @@ public class MaxHeap {
     }
 
     /**
-     *  This method used to print all element of the heap
-     *
+     * This method used to print all element of the heap
      */
     public void printHeap() {
         System.out.print("\nHeap = ");
@@ -130,8 +122,7 @@ public class MaxHeap {
     }
 
     /**
-     *  This method returns the max element of the heap.
-     *  complexity: O(1)
+     * This method returns the max element of the heap. complexity: O(1)
      */
     public int findMax() {
         if (isEmpty()) {
@@ -143,9 +134,8 @@ public class MaxHeap {
     public void print() {
         for (int i = 0; i <= (heapSize / 2); i++) {
             String leftChild = 2 * i + 1 < heapSize ? String.valueOf(heap[2 * i + 1]) : "EMPTY";
-            String rightChild =  2 * i + 2 < heapSize ? String.valueOf(heap[2 * i + 2]) : "EMPTY";
-            System.out.print(" PARENT : " + heap[i] + " LEFT CHILD : " + leftChild
-                + " RIGHT CHILD :" + rightChild);
+            String rightChild = 2 * i + 2 < heapSize ? String.valueOf(heap[2 * i + 2]) : "EMPTY";
+            System.out.print(" PARENT : " + heap[i] + " LEFT CHILD : " + leftChild + " RIGHT CHILD :" + rightChild);
             System.out.println();
         }
     }

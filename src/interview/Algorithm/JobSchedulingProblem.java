@@ -1,7 +1,9 @@
 package interview.Algorithm;
 
 /**
- * https://www.youtube.com/watch?v=cr6Ip0J9izc Given certain jobs with start and end time and amount you make on
+ * https://www.youtube.com/watch?v=cr6Ip0J9izc
+ *
+ * Given certain jobs with start and end time and amount you make on
  * finishing the job, find the maximum value you can make by scheduling jobs in non-overlapping way.
  */
 
@@ -36,8 +38,9 @@ class FinishTimeComparator implements Comparator<Job> {
 }
 
 /**
- * http://www.cs.princeton.edu/courses/archive/spr05/cos423/lectures/06dynamic-programming.pdf Given set of jobs with
- * start and end interval and profit, how to maximize profit such that jobs in subset do not overlap.
+ * http://www.cs.princeton.edu/courses/archive/spr05/cos423/lectures/06dynamic-programming.pdf
+ * Given set of jobs with start and end interval and profit, how to maximize profit such that jobs in subset do not
+ * overlap.
  */
 public class JobSchedulingProblem {
 

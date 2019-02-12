@@ -5,16 +5,16 @@ import java.util.PriorityQueue;
 import java.util.Random;
 
 /**
- * Find the kth largest element in an unsorted array.
- * Note that it is the kth largest element in the sorted order, not the kth distinct element.
-
- For example, given [3,2,1,5,6,4] and k = 2, return 5.
- https://www.programcreek.com/2014/05/leetcode-kth-largest-element-in-an-array-java/
+ * Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not
+ * the kth distinct element.
+ * <p>
+ * For example, given [3,2,1,5,6,4] and k = 2, return 5. https://www.programcreek
+ * .com/2014/05/leetcode-kth-largest-element-in-an-array-java/
  */
 public class LargestKthElementUnsortedArray {
 
     public static void main(String[] args) {
-        int[] input = {3,2,1,5,6,4};
+        int[] input = { 3, 2, 1, 5, 6, 4 };
         System.out.println(KthLargestUsingSort(input, 3));
         System.out.println(KthLargestUsingMinHeap(input, 3));
         System.out.println(findKthLargestUsingQuickSelect(input, 3));
@@ -22,9 +22,6 @@ public class LargestKthElementUnsortedArray {
 
     /**
      * Time complexity - O(nlog(n)).
-     * @param inputArray
-     * @param kthElement
-     * @return
      */
     private static int KthLargestUsingSort(int[] inputArray, int kthElement) {
         Arrays.sort(inputArray);
@@ -33,16 +30,20 @@ public class LargestKthElementUnsortedArray {
 
     /**
      * Time complexity is O(nlog(k)). Space complexity is O(k) for storing the top k numbers.
-     * @param inputArray
-     * @param kthElement
-     * @return
      */
     private static int KthLargestUsingMinHeap(int[] inputArray, int kthElement) {
         PriorityQueue<Integer> pq = new PriorityQueue<>(inputArray.length);
         for (int num : inputArray) {
-            pq.add(num);
+            /*pq.add(num);
 
             if (pq.size() > kthElement) {
+                pq.poll();
+            }*/
+
+            if (pq.size() < kthElement) {
+                pq.add(num);
+            } else if (pq.peek() <= num) {
+                pq.add(num);
                 pq.poll();
             }
         }
@@ -51,11 +52,8 @@ public class LargestKthElementUnsortedArray {
 
     /**
      * This solution works in O(n) time on average. However, in the worst case, the time complexity will be O(n^2).
-     * https://www.baeldung.com/java-kth-largest-element
-     * https://www.programcreek.com/2014/05/leetcode-kth-largest-element-in-an-array-java/
-     * @param nums
-     * @param k
-     * @return
+     * https://www.baeldung.com/java-kth-largest-element https://www.programcreek
+     * .com/2014/05/leetcode-kth-largest-element-in-an-array-java/
      */
     public static int findKthLargestUsingQuickSelect(int[] nums, int k) {
         if (k < 1 || nums == null) {
@@ -107,7 +105,7 @@ public class LargestKthElementUnsortedArray {
 
         swap(nums, left, end);*/
 
-        int pivot = new Random().nextInt((end-start) + start);
+        int pivot = new Random().nextInt((end - start) + start);
 
         int pivotIndex = partitionByRandomPivot(nums, start, end, nums[pivot]);
 
@@ -125,5 +123,4 @@ public class LargestKthElementUnsortedArray {
         nums[n1] = nums[n2];
         nums[n2] = tmp;
     }
-
 }

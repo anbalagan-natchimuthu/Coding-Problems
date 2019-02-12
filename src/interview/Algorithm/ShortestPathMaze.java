@@ -1,4 +1,4 @@
-package interview.Array;
+package interview.Algorithm;
 
 /**
  * http://www.techiedelight.com/find-shortest-path-in-maze/

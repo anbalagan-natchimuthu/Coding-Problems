@@ -25,7 +25,7 @@ public class WildCardMatching {
 
     public static void main(String args[]) {
         WildCardMatching wcm = new WildCardMatching();
-        System.out.println(wcm.isMatch("xbylmz", "x?y*z"));
+        System.out.println(wcm.isMatch("xbylmz", "x??l**z"));
     }
 
     private boolean isMatch(String inputString, String pattern) {
@@ -36,14 +36,14 @@ public class WildCardMatching {
         //e.g a**b***c --> a*b*c
         boolean isFirst = true;
         int writeIndex = 0;
-        for(int i = 0; i < patternArr.length; i++) {
+        for (int i = 0; i < patternArr.length; i++) {
             if (patternArr[i] == '*') {
                 if (isFirst) {
-                    patternArr[writeIndex ++] = patternArr[i];
+                    patternArr[writeIndex++] = patternArr[i];
                     isFirst = false;
                 }
             } else {
-                patternArr[writeIndex ++] = patternArr[i];
+                patternArr[writeIndex++] = patternArr[i];
                 isFirst = true;
             }
         }
@@ -56,14 +56,14 @@ public class WildCardMatching {
 
         T[0][0] = true;
 
-        for (int i= 1; i< T.length; i++) {
-            for (int j= 1; j< T[0].length; j++) {
+        for (int i = 1; i < T.length; i++) {
+            for (int j = 1; j < T[0].length; j++) {
                 // inputStringArr and patternArr are start from 0 but T[i][j] starts from 1.
                 // So, here we are comparing inputStringArr[i] == patternArr[j]
-                if (patternArr[j-1] == '?' || inputStringArr[i-1] == patternArr[j-1]) {
-                    T[i][j] = T[i-1][j-1];
-                } else if (patternArr[j-1] == '*'){
-                    T[i][j] = T[i-1][j] || T[i][j-1];
+                if (patternArr[j - 1] == '?' || inputStringArr[i - 1] == patternArr[j - 1]) {
+                    T[i][j] = T[i - 1][j - 1];
+                } else if (patternArr[j - 1] == '*') {
+                    T[i][j] = T[i - 1][j] || T[i][j - 1];
                 }
             }
         }

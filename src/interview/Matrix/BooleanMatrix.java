@@ -1,4 +1,4 @@
-package matrix;
+package interview.Matrix;
 
 public class BooleanMatrix {
 
@@ -14,9 +14,7 @@ public class BooleanMatrix {
     // 1 0 1 1
 
     public static void main(String[] args) {
-        int mat[][] = { { 1, 0, 0, 1 },
-            { 0, 0, 1, 0 },
-            { 0, 0, 0, 0 }, };
+        int mat[][] = { { 1, 0, 0, 1 }, { 0, 0, 1, 0 }, { 0, 0, 0, 0 }, };
 
         System.out.println("Matrix Intially");
 
