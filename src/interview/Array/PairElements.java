@@ -1,4 +1,4 @@
-package interview.misc;
+package interview.Array;
 
 import java.util.Collections;
 import java.util.HashMap;

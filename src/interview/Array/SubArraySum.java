@@ -1,4 +1,4 @@
-package interview.misc;
+package interview.Array;
 
 public class SubArraySum {
 

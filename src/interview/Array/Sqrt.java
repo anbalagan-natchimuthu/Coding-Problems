@@ -1,4 +1,4 @@
-package interview.misc;
+package interview.Array;
 public class Sqrt {
 	// define method header
 	public static double sqrt(double a) {

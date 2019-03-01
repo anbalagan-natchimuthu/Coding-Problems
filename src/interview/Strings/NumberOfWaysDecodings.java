@@ -24,39 +24,40 @@ import java.util.Arrays;
  * Explanation: It could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
  */
 public class NumberOfWaysDecodings {
-    public int numDecodings(String s) {
 
-        int[] memo = new int[s.length() + 1];
-        Arrays.fill(memo, -1);
+  public int numDecodings(String s) {
 
-        return findWays(s, s.length(), memo);
+    int[] memo = new int[s.length() + 1];
+    Arrays.fill(memo, -1);
+
+    return findWays(s, s.length(), memo);
+  }
+
+  private int findWays(String data, int length, int[] memo) {
+    if (length == 0) {
+      return 1;
     }
 
-    private int findWays(String data, int length, int[] memo) {
-        if (length == 0) {
-            return 1;
-        }
-
-        int pos = data.length() - length;
-        if (data.charAt(pos) == '0') {
-            return 0;
-        }
-
-        if (memo[length] != -1) {
-            return memo[length];
-        }
-
-        int returnVal = findWays(data, length - 1, memo);
-        if (length >= 2 && Integer.parseInt(data.substring(pos, pos + 2)) < 26) {
-            returnVal += findWays(data, length - 2, memo);
-        }
-        memo[length] = returnVal;
-        return returnVal;
+    int pos = data.length() - length;
+    if (data.charAt(pos) == '0') {
+      return 0;
     }
 
-    public static void main(String[] args) {
-        NumberOfWaysDecodings solution = new NumberOfWaysDecodings();
-        System.out.println("Result::" + solution.numDecodings("123"));
-        System.out.println("Result::" + solution.numDecodings("11111"));
+    if (memo[length] != -1) {
+      return memo[length];
     }
+
+    int returnVal = findWays(data, length - 1, memo);
+    if (length >= 2 && Integer.parseInt(data.substring(pos, pos + 2)) <= 26) {
+      returnVal += findWays(data, length - 2, memo);
+    }
+    memo[length] = returnVal;
+    return returnVal;
+  }
+
+  public static void main(String[] args) {
+    NumberOfWaysDecodings solution = new NumberOfWaysDecodings();
+    System.out.println("Result::" + solution.numDecodings("123"));
+    System.out.println("Result::" + solution.numDecodings("11111"));
+  }
 }
