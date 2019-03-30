@@ -1,6 +1,9 @@
 package interview.Algorithm;
 
+import java.util.Arrays;
+
 /**
+ * find SHORTEST / LONGEST path and NEGATIVE WEIGHT CYCLE in DIRECTED GRAPH
  * https://www.youtube.com/watch?v=-mOEd_3gTK0
  * Given a graph and a source vertex src in graph, find shortest paths from src to all vertices in the given graph.
  * The graph may contain negative weight edges
@@ -16,8 +19,6 @@ public class BellmanFord {
                 src = dest = weight = 0;
             }
         }
-
-        ;
 
         int V, E;
         Edge[] edge;
@@ -72,13 +73,13 @@ public class BellmanFord {
             }
             printArr(dist, V);
         }
+    }
 
-        // A utility function used to print the solution
-        void printArr(int dist[], int V) {
-            System.out.println("Vertex   Distance from Source");
-            for (int i = 0; i < V; ++i)
-                System.out.println(i + "\t\t" + dist[i]);
-        }
+    // A utility function used to print the solution
+    static void printArr(int dist[], int V) {
+        System.out.println("Vertex   Distance from Source");
+        for (int i = 0; i < V; ++i)
+            System.out.println(i + "\t\t" + dist[i]);
     }
 
     // Driver method to test above function
@@ -129,5 +130,48 @@ public class BellmanFord {
         graph.edge[7].weight = -3;
 
         graph.BellmanFord(graph, 0);
+
+
+        int inputGraph[][] = new int[][] {
+           //0   1  2  3  4  5  6  7  8
+            { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
+            { 0, 0, 8, 0, 0, 0, 0, 11, 0 },
+            { 0, 0, 0, 7, 0, 4, 0, 0, 2 },
+            { 0, 0, 0, 0, 9, 14, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 10, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 2, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 6 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 7 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+        };
+        findLongestPath(inputGraph, 0);
+    }
+
+    public static void findLongestPath(int[][] graph, int src) {
+        int[] dist = new int[graph.length];
+        Arrays.fill(dist, Integer.MIN_VALUE);
+
+        dist[src] = 0;
+
+        for (int i = 0; i <graph.length-1; i++) {
+            for (int u = 0; u < graph.length; u++) {
+                for (int v = 0; v < graph.length; v++) {
+                    if (dist[u] != Integer.MIN_VALUE &&
+                        graph[u][v] != 0 && dist[u] + graph[u][v] > dist[v]) {
+                        dist[v] = dist[u] + graph[u][v];
+                    }
+                }
+            }
+        }
+
+        for (int u = 0; u < graph.length; u++) {
+            for (int v = 0; v < graph.length; v++) {
+                if (graph[u][v] != 0 && dist[u] + graph[u][v] > dist[v]) {
+                    System.out.println("Graph contains negative weight cycle");
+                    return;
+                }
+            }
+        }
+        printArr(dist, graph.length);
     }
 }

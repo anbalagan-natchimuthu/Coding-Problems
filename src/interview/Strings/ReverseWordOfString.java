@@ -87,7 +87,7 @@ public class ReverseWordOfString {
         int k = 0;
         for (int i = 0; i < wordArr.length; i++) {
             if (wordArr[i] == ' ') {
-                reverse(wordArr, k, i);
+                reverse(wordArr, k, i-1);
                 k = i + 1;
             }
             if (i == wordArr.length - 1) {

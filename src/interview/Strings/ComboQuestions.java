@@ -1,9 +1,5 @@
 package interview.Strings;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.PriorityQueue;
 
 public class ComboQuestions {
@@ -15,15 +11,7 @@ public class ComboQuestions {
         String input1 = "   This   is a ";
         reverseOfString(input1);
         System.out.println();
-        String input2 = "abc,.@cbaa!!!";
-        boolean result = checkPalindrome(input2);
-        System.out.println(result);
-        String input3 = "A man, a plan, a canal: Panama";
-        boolean palRes = checkPalindrome(input3);
-        System.out.println(palRes);
-        System.out.println("***** groupAnagrams ******");
-        String input4 = "life in a file ni eifl";
-        groupAnagrams(input4);
+
         int[] arr = { 1, -1, 0, 3, 2, 1, 5, 6, 4 };
         kthLargestElemt(arr, 3);
 
@@ -149,67 +137,7 @@ public class ComboQuestions {
         System.out.println(pq.peek());
     }
 
-    /**
-     * check AllString class for better approach
-     * @param input
-     */
-    private static void groupAnagrams(String input) {
-        String[] inputWords = input.split(" ");
-        String[] copyWords = inputWords;
-        Map<String, List<String>> anagramMap = new HashMap<>();
-        List<String> wordList = new ArrayList<>();
 
-        for (int j = 0; j < inputWords.length; j++) {
-            char[] wordArr = new char[26];
-            StringBuilder newStr = new StringBuilder();
-
-            for (int i = 0; i < inputWords[j].length(); i++) {
-                wordArr[inputWords[j].charAt(i) - 'a']++;
-            }
-
-            for (int i = 0; i < wordArr.length; i++) {
-                if (wordArr[i] != 0) {
-                    newStr.append((char) (i + 'a'));
-                }
-            }
-            System.out.println("Sorted word is " + newStr.toString());
-
-            if (!anagramMap.containsKey(newStr.toString())) {
-                wordList = new ArrayList<>();
-            } else {
-                wordList = anagramMap.get(newStr.toString());
-            }
-            wordList.add(copyWords[j]);
-            anagramMap.put(newStr.toString(), wordList);
-        }
-
-        for (Map.Entry<String, List<String>> entry : anagramMap.entrySet()) {
-            System.out.println("Key " + entry.getKey());
-            for (String value : entry.getValue()) {
-                System.out.println(value);
-            }
-        }
-    }
-
-    private static boolean checkPalindrome(String input) {
-        char[] charArr = input.toLowerCase().toCharArray();
-        int i = 0;
-        int j = input.length() - 1;
-        while (i <= j) {
-            if (!(charArr[i] >= 'a' && charArr[i] <= 'z')) {
-                i++;
-            } else if (!(charArr[j] >= 'a' && charArr[j] <= 'z')) {
-                j--;
-            } else if ((charArr[i] >= 'a' && charArr[i] <= 'z') && (charArr[j] >= 'a' && charArr[j] <= 'z')) {
-                if (charArr[i] != charArr[j]) {
-                    return false;
-                }
-                i++;
-                j--;
-            }
-        }
-        return true;
-    }
 
     private static void reverseStrWithSplChars(String input) {
         char[] charArr = input.toCharArray();

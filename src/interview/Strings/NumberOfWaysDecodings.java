@@ -57,7 +57,7 @@ public class NumberOfWaysDecodings {
 
   public static void main(String[] args) {
     NumberOfWaysDecodings solution = new NumberOfWaysDecodings();
-    System.out.println("Result::" + solution.numDecodings("123"));
+    System.out.println("Result::" + solution.numDecodings("20"));
     System.out.println("Result::" + solution.numDecodings("11111"));
   }
 }

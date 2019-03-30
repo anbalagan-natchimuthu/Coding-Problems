@@ -26,7 +26,7 @@ public class DisJointSet {
     /**
      * Create a set with only one element.
      */
-    private void makeSet(long data) {
+    public void makeSet(long data) {
         Node node = new Node();
         node.data = data;
         node.parent = node;
@@ -39,7 +39,7 @@ public class DisJointSet {
      *
      * @return true if data1 and data2 are in different set before union else false.
      */
-    private boolean union(long data1, long data2) {
+    public boolean union(long data1, long data2) {
         Node node1 = map.get(data1);
         Node node2 = map.get(data2);
 
@@ -60,7 +60,7 @@ public class DisJointSet {
         return true;
     }
 
-    private Node findSet(Node node) {
+    public Node findSet(Node node) {
         Node parent = node.parent;
         if (node == parent) {
             return parent;

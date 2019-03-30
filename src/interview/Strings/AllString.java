@@ -1,9 +1,7 @@
 package interview.Strings;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class AllString {
@@ -18,11 +16,6 @@ public class AllString {
 
     boolean isPalin = isPalindrome("AnbnA");
     System.out.println("IsPalindrome " + isPalin);
-
-    boolean isAnag = isAnagram("anagram", "gramana");
-    System.out.println("IsAnagram " + isAnag);
-
-    groupAnagrams("life in a file");
 
     int arr[] = new int[]{1, 5, 3, 18, 25, 5, 26};
     int minDiff = findMinDifferenceInArray(arr);
@@ -113,71 +106,6 @@ public class AllString {
       }
     }
     return true;
-  }
-
-  /**
-   * function to check whether two strings are anagram of each other
-   * https://www.geeksforgeeks.org/check-whether-two-strings-are-anagram-of-each-other/
-   */
-  public static boolean isAnagram(String input1, String input2) {
-
-    // If both strings are of different length.
-    // Removing this condition will make the program
-    // fail for strings like "aaca" and "aca"
-    if (input1.length() != input2.length()) {
-      return false;
-    }
-
-    int NO_OF_CHARS = 256;
-    int frequencies[] = new int[NO_OF_CHARS];
-
-    // For each character in input string, increment count in the corresponding frequencies array
-    for (int i = 0; i < input1.length(); i++) {
-      frequencies[input1.charAt(i)]++;
-    }
-
-    for (int i = 0; i < input2.length(); i++) {
-      if (frequencies[input2.charAt(i)] == 0) {
-        return false;
-      }
-      frequencies[input2.charAt(i)]--;
-    }
-
-    return true;
-  }
-
-  /**
-   * Given an array of strings, return all groups of strings that are anagrams.
-   * https://www.programcreek.com/2014/04/leetcode-anagrams-java/
-   * Refer: GroupAnagram.java for better solution
-   */
-  public static List<List<String>> groupAnagrams(String inputStr) {
-    String[] strs = inputStr.split(" ");
-    List<List<String>> result = new ArrayList<>();
-
-    HashMap<String, ArrayList<String>> map = new HashMap<>();
-    for (String str : strs) {
-      char[] arr = new char[26];
-      for (int i = 0; i < str.length(); i++) {
-        arr[str.charAt(i) - 'a']++;
-      }
-      String ns = new String(arr);
-
-      if (map.containsKey(ns)) {
-        map.get(ns).add(str);
-      } else {
-        ArrayList<String> al = new ArrayList<>();
-        al.add(str);
-        map.put(ns, al);
-      }
-    }
-
-    result.addAll(map.values());
-    for (List<String> res : result) {
-      System.out.print(res);
-    }
-    System.out.println();
-    return result;
   }
 
   public static int findMinDifferenceInArray(int[] arr) {

@@ -19,26 +19,23 @@ import java.util.Arrays;
 public class IsoMorphic {
 
     public static void main(String[] args) {
-        System.out.println("Is Ismorphic " + areIsomorphicString("egf", "add"));
-        System.out.println("Is Ismorphic " + areIsomorphicString("foo", "bar"));
-        System.out.println("Is Ismorphic " + areIsomorphicString("abca", "zbxz"));
-        System.out.println("Is Ismorphic " + areIsomorphic("ppierasdadasdasdasdasdasdasda", "titleasdasdasdasdasdasdasdasd"));
+        System.out.println("Is Ismorphic " + areIsomorphic("egf", "add"));
+        System.out.println("Is Ismorphic " + areIsomorphic("foo", "bar"));
+        System.out.println("Is Ismorphic " + areIsomorphic("egg", "add"));
+        System.out.println("Is Ismorphic " + isIsomorphic("ab", "aa"));
     }
 
-    public static boolean areIsomorphicString(String s1, String s2) {
-        int[] st1Array = new int[128];
-        int[] st2Array = new int[128];
-        int mask = 1;
-        if (s1.length() != s2.length()) {
-            return false;
-        }
+    public static boolean isIsomorphic(String s1, String s2) {
+
+        int[] st1Array = new int[256];
+        int[] st2Array = new int[256];
+
         for (int i = 0; i < s1.length(); i++) {
-            if (st1Array[s1.charAt(i)] != st1Array[s2.charAt(i)]) {
+            if (st1Array[s1.charAt(i)] != st2Array[s2.charAt(i)]) {
                 return false;
             }
-            st1Array[s1.charAt(i)] = mask;
-            st1Array[s2.charAt(i)] = mask;
-            mask++;
+            st1Array[s1.charAt(i)] = i+1;
+            st2Array[s2.charAt(i)] = i+1;
         }
         return true;
     }

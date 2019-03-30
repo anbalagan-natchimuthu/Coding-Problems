@@ -1,6 +1,7 @@
 package interview.Algorithm;
 
 /**
+ * find SHORTEST / LONGEST path in UNDIRECTED GRAPH
  * https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/
  * Given a graph and a source vertex in the graph, find shortest paths from source to all vertices in the given graph.
  */
@@ -36,8 +37,9 @@ public class Dijkstra {
     // algorithm for a graph represented using adjacency matrix
     // representation
     void dijkstra(int graph[][], int src) {
-        int dist[] = new int[graph.length]; // The output array. dist[i] will hold
-        // the shortest distance from src to i
+
+        // The output array dist[i] will hold the shortest distance from src to i
+        int dist[] = new int[graph.length];
 
         // sptSet[i] will true if vertex i is included in shortest
         // path tree or shortest distance from src to i is finalized
@@ -98,6 +100,49 @@ public class Dijkstra {
         };
         Dijkstra t = new Dijkstra();
         t.dijkstra(graph, 0);
+
+        t.findLongestPath(graph, 0);
+    }
+
+
+    public void findLongestPath(int[][] graph, int src) {
+        int[] longDist = new int[graph.length];
+        boolean[] visited = new boolean[graph.length];
+
+        for(int i = 0; i < longDist.length; i++) {
+            longDist[i] = Integer.MIN_VALUE;
+        }
+
+        longDist[src] = 0;
+        visited[src] = true;
+
+        for (int i = 0; i < graph.length; i++) {
+            int u = maxDistance(visited, longDist);
+
+            visited[u] = true;
+
+            for (int v = 0; v < graph.length; v++) {
+                if (visited[v] == false && graph[u][v] != 0 && longDist[u] != Integer.MIN_VALUE &&
+                longDist[v] < longDist[u] + graph[u][v]) {
+                    longDist[v] = longDist[u] + graph[u][v];
+                }
+            }
+        }
+
+        // print the constructed distance array
+        printSolution(longDist);
+    }
+
+    private int maxDistance(boolean[] visited, int[] dist) {
+        int maxDist = Integer.MIN_VALUE, maxIndex = -1;
+
+        for (int i = 0 ; i < dist.length; i++) {
+            if (dist[i] > maxDist) {
+                maxDist = dist[i];
+                maxIndex = i;
+            }
+        }
+        return maxIndex;
     }
 }
 

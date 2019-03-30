@@ -348,8 +348,8 @@ public class SubSets_Permutations {
 
     System.out.println("**********************************************************");
 
-    int[] uniqueCombSum = {10, 1, 2, 7, 6, 1, 5};
-    List<List<Integer>> uniqueCombSumList = uniqueCombinationSum(uniqueCombSum, 8);
+    int[] uniqueCombSum = {2, 5, 2, 1, 2};
+    List<List<Integer>> uniqueCombSumList = uniqueCombinationSum(uniqueCombSum, 5);
 
     for (List<Integer> sum : uniqueCombSumList) {
       System.out.println(sum.toString());
