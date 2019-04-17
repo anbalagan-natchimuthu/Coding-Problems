@@ -5,15 +5,14 @@ package interview.Array;
  * make at most 2 transactions in a day, where as second transaction can only start after first one is complete
  * (Sell->buy->sell->buy). Given stock prices throughout day, find out maximum profit that a share trader could have
  * made.
- * <p>
+ *
  * Examples:
- * <p>
- * Input:   price[] = {10, 22, 5, 75, 65, 80} Output:  87 Trader earns 87 as sum of 12 and 75 Buy at price 10, sell at
- * 22, buy at 5 and sell at 80
- * <p>
- * Input:   price[] = {2, 30, 15, 10, 8, 25, 80} Output:  100 Trader earns 100 as sum of 28 and 72 Buy at price 2, sell
- * at 30, buy at 8 and sell at 80
- * <p>
+ * Input:   price[] = {10, 22, 5, 75, 65, 80}
+ * Output:  87 Trader earns 87 as sum of 12 and 75 Buy at price 10, sell at 22, buy at 5 and sell at 80
+ *
+ * Input:   price[] = {2, 30, 15, 10, 8, 25, 80}
+ * Output:  100 Trader earns 100 as sum of 28 and 72 Buy at price 2, sell at 30, buy at 8 and sell at 80
+ *
  * https://www.geeksforgeeks.org/maximum-profit-by-buying-and-selling-a-share-at-most-twice/
  */
 public class MaximumProfitTrade {
@@ -56,8 +55,7 @@ public class MaximumProfitTrade {
       //    profit of other trans. stored in profit[i]
       profit[i] = Math.max(profit[i - 1], profit[i] + (price[i] - min_price));
     }
-    int result = profit[n - 1];
-    return result;
+    return profit[n - 1];
   }
 
   /**
@@ -106,16 +104,11 @@ public class MaximumProfitTrade {
 
   static int maxProfitWithSlowSolution(int[] price, int k) {
 
-    // table to store results
-    // of subproblems
-    // profit[t][i] stores
-    // maximum profit using
-    // atmost t transactions up
-    // to day i (including day i)
+    // table to store results of subproblems
+    // profit[t][i] stores maximum profit using atmost t transactions up to day i (including day i)
     int[][] profit = new int[k + 1][price.length];
 
-    // fill the table in
-    // bottom-up fashion
+    // fill the table in bottom-up fashion
     for (int i = 1; i < profit.length; i++) {
       for (int j = 1; j < profit[0].length; j++) {
         int max_so_far = 0;

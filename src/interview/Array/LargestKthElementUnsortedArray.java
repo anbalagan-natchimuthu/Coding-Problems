@@ -8,8 +8,8 @@ import java.util.Random;
  * Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not
  * the kth distinct element.
  * <p>
- * For example, given [3,2,1,5,6,4] and k = 2, return 5. https://www.programcreek
- * .com/2014/05/leetcode-kth-largest-element-in-an-array-java/
+ * For example, given [3,2,1,5,6,4] and k = 2, return 5.
+ * https://www.programcreek.com/2014/05/leetcode-kth-largest-element-in-an-array-java/
  */
 public class LargestKthElementUnsortedArray {
 
@@ -52,8 +52,8 @@ public class LargestKthElementUnsortedArray {
 
     /**
      * This solution works in O(n) time on average. However, in the worst case, the time complexity will be O(n^2).
-     * https://www.baeldung.com/java-kth-largest-element https://www.programcreek
-     * .com/2014/05/leetcode-kth-largest-element-in-an-array-java/
+     * https://www.baeldung.com/java-kth-largest-element
+     * https://www.programcreek.com/2014/05/leetcode-kth-largest-element-in-an-array-java/
      */
     public static int findKthLargestUsingQuickSelect(int[] nums, int k) {
         if (k < 1 || nums == null) {
@@ -72,7 +72,7 @@ public class LargestKthElementUnsortedArray {
                 right--;
             }
             if (left <= right) {
-                swap(arr, arr[left], arr[right]);
+                swap(arr, left, right);
                 left++;
                 right--;
             }

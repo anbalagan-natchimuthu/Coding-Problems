@@ -26,6 +26,8 @@ public class Triplet {
     for (int i = 0; i < result.size(); i++) {
       System.out.println(result.get(i).toString());
     }
+
+    System.out.println(threeSumClosest(new int[]{-1, 2, 1, -4}, 1));
   }
 
   public static List<List<Integer>> threeSum(int[] nums) {
@@ -81,13 +83,13 @@ public class Triplet {
    * The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
    */
 
-  public int threeSumClosest(int[] nums, int target) {
+  public static int threeSumClosest(int[] nums, int target) {
     int min = Integer.MAX_VALUE;
     int result = 0;
 
     Arrays.sort(nums);
 
-    for (int i = 0; i < nums.length; i++) {
+    for (int i = 0; i < nums.length - 2; i++) {
       int j = i + 1;
       int k = nums.length - 1;
       while (j < k) {

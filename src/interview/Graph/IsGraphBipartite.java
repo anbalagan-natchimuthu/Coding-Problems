@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Stack;
 
 /**
+ * https://leetcode.com/problems/is-graph-bipartite/solution/
+ *
  * Given an undirected graph, return true if and only if it is bipartite.
  *
  * Recall that a graph is bipartite if we can split it's set of nodes into two independent subsets A and B such that
@@ -15,6 +17,10 @@ import java.util.Stack;
  *
  * Example 1:
  * Input: [[1,3], [0,2], [1,3], [0,2]]
+ * Vertex 0 has edges to vertex 1and 3
+ * Vertex 1 has edges to vertex 0 and 2
+ * Vertex 2 has edges to vertex 1 and 3
+ * Vertex 3 has edges to vertex 0 and 2
  * Output: true
  * Explanation:
  * The graph looks like this:
@@ -27,8 +33,8 @@ import java.util.Stack;
 public class IsGraphBipartite {
 
   public static void main(String[] args) {
-    System.out.println(isBipartite(new int[][] {{1,3}, {0,2}, {1,3}, {0,2}}));
-    System.out.println(isBipartite(new int[][] {{1,2,3}, {0,2}, {0,1,3}, {0,2}}));
+    System.out.println(isBipartite(new int[][]{{1, 3}, {0, 2}, {1, 3}, {0, 2}}));
+    System.out.println(isBipartite(new int[][]{{1, 2, 3}, {0, 2}, {0, 1, 3}, {0, 2}}));
   }
 
   public static boolean isBipartite(int[][] graph) {
@@ -38,7 +44,7 @@ public class IsGraphBipartite {
 
     for (int start = 0; start < n; ++start) {
       if (color[start] == -1) {
-        Stack<Integer> stack = new Stack();
+        Stack<Integer> stack = new Stack<>();
         stack.push(start);
         color[start] = 0;
 

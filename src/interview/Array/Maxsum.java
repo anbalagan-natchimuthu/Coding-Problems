@@ -40,8 +40,7 @@ public class Maxsum {
 
     // Compute values for other iterations
     for (int i = 1; i < n; i++) {
-      // Compute next value using previous
-      // value in O(1) time
+      // Compute next value using previous value in O(1) time
       curr_val = curr_val - (cum_sum - arr[i - 1]) + arr[i - 1] * (n - 1);
 
       // Update result if required

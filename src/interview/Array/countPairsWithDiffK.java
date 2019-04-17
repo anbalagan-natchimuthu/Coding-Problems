@@ -1,6 +1,8 @@
 package interview.Array;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * https://leetcode.com/problems/k-diff-pairs-in-an-array/
@@ -22,9 +24,12 @@ public class countPairsWithDiffK {
   public static void main(String[] args) {
     int count = countPairsWithKDiff(new int[]{1, 2, 3, 4, 5}, 1);
     System.out.println("count::" + count);
+    System.out.println("count::" + findPairs(new int[]{1, 2, 3, 4, 5}, 1));
 
     count = countPairsWithKDiff(new int[]{1, 3, 1, 3, 5, 4, 4}, 0);
     System.out.println("count::" + count);
+    System.out.println("count::" + findPairs(new int[]{3, 1, 3, 1, 5, 4, 4, 1, 1}, 0));
+    System.out.println("count::" + findPairs(new int[]{1, 1, 3, 4, 5, 3}, 2));
   }
 
   private static int countPairsWithKDiff(int[] arr, int diff) {
@@ -49,6 +54,32 @@ public class countPairsWithDiffK {
         r++;
       }
     }
+    return count;
+  }
+
+
+  public static int findPairs(int[] nums, int k) {
+    if (nums == null || nums.length == 0 || k < 0)   return 0;
+
+    Map<Integer, Integer> map = new HashMap<>();
+    int count = 0;
+    for (int i : nums) {
+      map.put(i, map.getOrDefault(i, 0) + 1);
+    }
+
+    for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+      if (k == 0) {
+        //count how many elements in the array that appear more than twice.
+        if (entry.getValue() >= 2) {
+          count++;
+        }
+      } else {
+        if (map.containsKey(entry.getKey() + k)) {
+          count++;
+        }
+      }
+    }
+
     return count;
   }
 }

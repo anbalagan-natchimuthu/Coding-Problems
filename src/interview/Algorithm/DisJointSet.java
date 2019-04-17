@@ -5,19 +5,14 @@ import java.util.Map;
 
 /**
  * https://www.youtube.com/watch?v=ID00PMy0-vE
- * <p>
  * https://www.youtube.com/watch?v=n_t0a_8H8VY
- * <p>
  * Implementation of Disjoint Set using Union by Rank and Path Compression
  */
 public class DisJointSet {
 
     class Node {
-
         long data;
-
         Node parent;
-
         int rank;
     }
 

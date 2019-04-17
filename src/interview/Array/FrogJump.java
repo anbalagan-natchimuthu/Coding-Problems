@@ -39,11 +39,14 @@ import java.util.Set;
 public class FrogJump {
 
   public static boolean canCross(int[] stones) {
+    //key refers to the position at which a stone is present and value is a set containing the jumpsize
+    // which can lead to the current stone position
     HashMap<Integer, Set<Integer>> map = new HashMap<>();
     for (int i = 0; i < stones.length; i++) {
       map.put(stones[i], new HashSet<>());
     }
     map.get(0).add(0);
+
     for (int i = 0; i < stones.length; i++) {
       for (int k : map.get(stones[i])) {
         for (int step = k - 1; step <= k + 1; step++) {

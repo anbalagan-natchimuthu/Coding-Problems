@@ -12,10 +12,14 @@ package interview.Array;
  * Output: 2
  * Explanation: the subarray [4,3] has the minimal length under the problem constraint.
  *
+ * Time complexity: O(n). Single iteration of O(n).
+ * Each element can be visited atmost twice, once by the right pointer(i) and (atmost)once by the left pointer.
+ * Space complexity: O(1) extra space. Only constant space required for left, sum, ans and i.
+ *
  */
 public class MinimumSizeSubarraySum {
 
-  public static int minSubArrayLen(int s, int[] nums) {
+  public static int minSubArrayLen(int target, int[] nums) {
 
     int left = 0;
     int ans = Integer.MAX_VALUE;
@@ -24,7 +28,7 @@ public class MinimumSizeSubarraySum {
     for (int i = 0; i < nums.length; i++) {
       sum += nums[i];
 
-      while (sum >= s) {
+      while (sum >= target) {
         ans = Math.min(ans, i+1 - left);
         sum -= nums[left++];
       }

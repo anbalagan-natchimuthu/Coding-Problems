@@ -15,7 +15,7 @@ public class PairElements {
 	
 	public static void findPairElements(int[] inputElemtns, int targetElement) {
 		
-		LinkedList<Integer> orderedValues = new LinkedList<Integer>();		
+		LinkedList<Integer> orderedValues = new LinkedList<>();
 		for(int i=0; i<inputElemtns.length; i++) {
 			orderedValues.add(inputElemtns[i]);
 		}
@@ -31,7 +31,7 @@ public class PairElements {
 	}
 	
 	public static void getSumPairs(int[] input, int k) {
-		Map<Integer, Integer> pairs = new HashMap<Integer, Integer>();
+		Map<Integer, Integer> pairs = new HashMap<>();
 		for (int i = 0; i < input.length; i++) {
 			if (pairs.containsKey(input[i])) System.out.println(input[i] + ", " + pairs.get(input[i]));
 			else pairs.put(k - input[i], input[i]);

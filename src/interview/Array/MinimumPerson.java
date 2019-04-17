@@ -55,8 +55,8 @@ public class MinimumPerson {
 
         Arrays.sort(startTimings);
         Arrays.sort(endTimings);
-        int guests_in = 1, maxGuests = 0, time = startTimings[0];
-        int i = 1, j = 0;
+        int guests_in = 0, maxGuests = 0, time = 0;
+        int i = 0, j = 0;
 
         while (i < startTimings.length && j < endTimings.length) {
             if (startTimings[i] <= endTimings[j]) {

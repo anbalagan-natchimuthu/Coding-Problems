@@ -15,6 +15,8 @@ public class KClosesPoint {
     int[][] points = {{1, 0}, {-1, 0}, {2, 0}, {5, 3}, {7, 4}};
     int[][] closesKPoints = closesPoint.findClosesPoint(points, new int[]{0, 0}, 3);
     System.out.println("********** CLOSES POINTS ***********\n\n" + Arrays.deepToString(closesKPoints));
+    System.out.println("********** CLOSES POINTS ***********\n\n" + Arrays
+        .deepToString(closesPoint.kClosestPoints(new int[][]{{1, 0}, {-1, 0}, {2, 0}, {5, 3}, {7, 4}}, 3)));
   }
 
   private int[][] findClosesPoint(int[][] points, int[] coordinates, int k) {

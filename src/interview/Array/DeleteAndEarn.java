@@ -1,7 +1,6 @@
 package interview.Array;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * https://leetcode.com/problems/delete-and-earn/
@@ -23,25 +22,31 @@ import java.util.Map;
 public class DeleteAndEarn {
 
   public static void main(String[] args) {
-    System.out.println(deleteAndEarn(new int[]{2, 2, 3, 3, 3, 4}));
+    System.out.println(deleteAndEarn(new int[]{2, 2, 4, 3, 3, 3}));
+    System.out.println(deleteAndEarn(new int[]{2, 5, 9, 4}));
   }
 
+  /**
+   * Similar to House Robber
+   * https://leetcode.com/problems/house-robber/solution/
+   */
   public static int deleteAndEarn(int[] nums) {
-    final Map<Integer, Integer> values = new HashMap<>();
+    // sort it in increment order
+    final TreeMap<Integer, Integer> values = new TreeMap<>();
     for (final int num : nums) {
       values.put(num, values.getOrDefault(num, 0) + num);
     }
-    int pre = 0, cur = 0;
+    int prevPrevious = 0, previous = 0;
     for (final int num : values.keySet()) {
       if (!values.containsKey(num - 1)) {
-        pre = cur;
-        cur += values.get(num);
+        prevPrevious = previous;
+        previous += values.get(num);
       } else {
-        final int temp = Math.max(pre + values.get(num), cur);
-        pre = cur;
-        cur = temp;
+        final int temp = Math.max(prevPrevious + values.get(num), previous);
+        prevPrevious = previous;
+        previous = temp;
       }
     }
-    return cur;
+    return previous;
   }
 }

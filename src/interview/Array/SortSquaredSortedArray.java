@@ -14,29 +14,29 @@ import java.util.PriorityQueue;
 //     Result: [-23, -5, 1, 7]
 public class SortSquaredSortedArray {
 
-    public static void main(String[] args) {
-        int[] nums = new int[] {-4, -2, 2, 4};
-        int[] res = sortTransformedArray(nums, 1, 3, 5);
-        for (int val : res) {
-            System.out.print(val + " ");
-        }
-        System.out.println();
-        nums = new int[] {-4, -2, 2, 4};
-        res = sortTransformedArray(nums, -1, 3, 5);
-        for (int val : res) {
-            System.out.print(val + " ");
-        }
+  public static void main(String[] args) {
+    int[] nums = new int[]{-4, -2, 2, 4};
+    int[] res = sortTransformedArray(nums, 1, 3, 5);
+    for (int val : res) {
+      System.out.print(val + " ");
     }
+    System.out.println();
+    nums = new int[]{-4, -2, 2, 4};
+    res = sortTransformedArray(nums, -1, 3, 5);
+    for (int val : res) {
+      System.out.print(val + " ");
+    }
+  }
 
-   private static int[] sortTransformedArray(int[] nums, int a, int b, int c) {
-            PriorityQueue<Integer> priorityQueue =  new PriorityQueue<>();
-            for (int d : nums) {
-                priorityQueue.add(a * d * d + b * d + c);
-            }
-            int i = 0;
-            while (priorityQueue.peek() != null) {
-                nums[i++] = priorityQueue.remove();
-            }
-            return nums;
-        }
+  private static int[] sortTransformedArray(int[] nums, int a, int b, int c) {
+    PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+    for (int d : nums) {
+      priorityQueue.add(a * d * d + b * d + c);
     }
+    int i = 0;
+    while (!priorityQueue.isEmpty()) {
+      nums[i++] = priorityQueue.remove();
+    }
+    return nums;
+  }
+}

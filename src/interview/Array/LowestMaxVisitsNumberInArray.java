@@ -86,6 +86,8 @@ public class LowestMaxVisitsNumberInArray {
     list.add(2);
     long smillis = System.currentTimeMillis();
 
+   // System.out.println(list.stream().mapToInt(Integer::intValue).max().getAsInt());
+
     getMaxMinInArray(list);
     List<StartEnd> modifiedList = constructInput(list);
     int[] visitedArrays = populateArray(modifiedList);

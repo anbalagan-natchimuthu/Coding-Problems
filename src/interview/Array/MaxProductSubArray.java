@@ -23,7 +23,7 @@ public class MaxProductSubArray {
         System.out.println("Result " + result);
         System.out.println("maxProduct: " + maxProduct(arr, 5));
 
-        arr = new int[] { 2, 3, 4, 0, 2 };
+        arr = new int[] { 0, 3, 4, -1, 2 };
         System.out.println("maxProduct: " + maxProduct(arr, 5));
     }
 
@@ -54,8 +54,7 @@ public class MaxProductSubArray {
     static int maxProduct(int arr[], int n)
     {
 
-        // Variables to store maximum and minimum
-        // product till ith index.
+        // Variables to store maximum and minimum product till ith index.
         int minVal = arr[0];
         int maxVal = arr[0];
 
@@ -64,9 +63,7 @@ public class MaxProductSubArray {
         for (int i = 1; i < n; i++)
         {
 
-            // When multiplied by -ve number,
-            // maxVal becomes minVal
-            // and minVal becomes maxVal.
+            // When multiplied by -ve number, maxVal becomes minVal and minVal becomes maxVal.
             if (arr[i] < 0)
             {
                 int temp = maxVal;
@@ -75,8 +72,7 @@ public class MaxProductSubArray {
 
             }
 
-            // maxVal and minVal stores the
-            // product of subarray ending at arr[i].
+            // maxVal and minVal stores the product of subarray ending at arr[i].
             maxVal = Math.max(arr[i], maxVal * arr[i]);
             minVal = Math.min(arr[i], minVal * arr[i]);
 

@@ -41,24 +41,27 @@ public class MinMeetingRooms {
     if (intervals.length == 0) {
       return 0;
     }
+    //Arrays.sort(intervals, Comparator.comparingInt(Interval::getStart));
     Arrays.sort(intervals, (a, b) -> {
       return a.start - b.start;
     });
 
     // Sort it by end so that minimumInterval will check against lowest ending time
+    //PriorityQueue<Interval> pq = new PriorityQueue<>(Comparator.comparingInt(Interval::getEnd));
     PriorityQueue<Interval> pq = new PriorityQueue<>((a, b) -> a.end - b.end);
+
     pq.offer(intervals[0]);
     int rooms = 1;
     for (int i = 1; i < intervals.length; i++) {
       Interval current = intervals[i];
-      Interval minimumInterval = pq.poll();
-      if (current.start >= minimumInterval.end) {
+      if (current.start >= pq.peek().end) {
+        Interval minimumInterval = pq.poll();
         minimumInterval = new Interval(minimumInterval.start, intervals[i].end);
+        pq.offer(minimumInterval);
       } else {
         rooms++;
         pq.offer(intervals[i]);
       }
-      pq.offer(minimumInterval);
     }
     while (!pq.isEmpty()) {
       Interval res = pq.poll();

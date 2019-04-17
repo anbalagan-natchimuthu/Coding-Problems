@@ -95,59 +95,59 @@ public class MergeLinkedList {
     }
   }
 
-  private static Node mergeLinkedList(Node n1, Node x1) {
-    Node head = new Node(0);
-    Node newLL = head;
-
-    while (n1 != null && x1 != null) {
-      if (n1.data < x1.data) {
-        newLL.next = n1;
-        n1 = n1.next;
-      } else {
-        newLL.next = x1;
-        x1 = x1.next;
-      }
-      newLL = newLL.next;
-    }
-
-    while (x1 != null) {
-      newLL.next = x1;
-      x1 = x1.next;
-      newLL = newLL.next;
-    }
-
-    while (n1 != null) {
-      newLL.next = n1;
-      n1 = n1.next;
-      newLL = newLL.next;
-    }
-    return head.next;
-  }
-
   /**
+   * Solution: 1
    * https://leetcode.com/problems/merge-k-sorted-lists/solution/
+   *
+   * Time complexity : O(kN) where k is the number of linked lists.
+   * We can merge two sorted linked list in O(n) time where n is the total number of nodes in two lists.
+   *
+   * Space complexity : O(1)
+   * We can merge two sorted linked list in O(1) space.
    */
   private static Node MergeKLinedList(Node[] lists) {
     Node finalList = lists[0];
 
     for (int i = 1; i < lists.length; i++) {
-      finalList = mergeLinkedList(finalList, lists[i]);
+      finalList = mergeTwoLinkedList(finalList, lists[i]);
     }
 
     return finalList;
   }
 
+  private static Node mergeTwoLinkedList(Node l1, Node l2) {
+    Node prehead = new Node(0);
+    Node prev = prehead;
+
+    while (l1 != null && l2 != null) {
+      if (l1.data < l2.data) {
+        prev.next = l1;
+        l1 = l1.next;
+      } else {
+        prev.next = l2;
+        l2 = l2.next;
+      }
+      prev = prev.next;
+    }
+
+    // exactly one of l1 and l2 can be non-null at this point, so connect
+    // the non-null list to the end of the merged list.
+    prev.next = l1 == null ? l2 : l1;
+    return prehead.next;
+  }
+
   /**
-   * Time complexity : O(N\log k)O(Nlogk) where \text{k}k is the number of linked lists.
+   * Solution: 2
+   * Time complexity : O(Nlogk) where k is the number of linked lists.
    *
-   * The comparison cost will be reduced to O(\log k)O(logk) for every pop and insertion to priority queue. But
-   * finding the node with the smallest value just costs O(1)O(1) time.
-   * There are NN nodes in the final linked list.
+   * The comparison cost will be reduced to O(logk) for every pop and insertion to priority queue. But
+   * finding the node with the smallest value just costs O(1) time.
+   * There are N nodes in the final linked list.
    * Space complexity :
    *
-   * O(n)O(n) Creating a new linked list costs O(n)O(n) space.
-   * O(k)O(k) The code above present applies in-place method which cost O(1)O(1) space. And the priority queue (often
-   * implemented with heaps) costs O(k)O(k) space (it's far less than NN in most situations).
+   * O(n) Creating a new linked list costs O(n) space.
+   * O(k) The code above present applies in-place method which cost O(1) space. And the priority queue (often
+   * implemented with heaps) costs O(k) space (it's far less than NN in most situations).
    */
   public static Node mergeKLists(Node[] lists) {
     if (lists == null || lists.length == 0) {
@@ -181,5 +181,25 @@ public class MergeLinkedList {
     }
 
     return dummy.next;
+  }
+
+  /**
+   * Solution: 3
+   *
+   */
+  public static Node mergeKLinkedLists(Node[] lists) {
+    if (lists.length == 0) {
+      return null;
+    }
+
+    int interval = 1;
+    while (interval < lists.length) {
+      for (int i = 0; i + interval < lists.length; i = i + interval * 2) {
+        lists[i] = mergeTwoLinkedList(lists[i], lists[i + interval]);
+      }
+
+      interval *= 2;
+    }
+    return lists[0];
   }
 }

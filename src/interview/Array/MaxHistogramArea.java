@@ -4,10 +4,10 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 /**
- * PROBLEM: 1 https://www.youtube.com/watch?v=ZmnqCZp9bBs Find the largest rectangular area possible in a given
- * histogram where the largest rectangle can be made of a number of contiguous bars. For simplicity, assume that all
- * bars have same width and the width is 1 unit.
- * <p>
+ * PROBLEM: 1 https://www.youtube.com/watch?v=ZmnqCZp9bBs
+ * Find the largest rectangular area possible in a given histogram where the largest rectangle can be made of a
+ * number of contiguous bars. For simplicity, assume that all bars have same width and the width is 1 unit.
+ *
  * For example, consider the following histogram with 7 bars of heights {6, 2, 5, 4, 5, 1, 6}. The largest possible
  * rectangle possible is 12 (see the below figure, the max area rectangle is highlighted in red).
  */
@@ -76,13 +76,13 @@ public class MaxHistogramArea {
 
     /**
      * PROBLEM: 2 https://www.youtube.com/watch?v=g8bSdXCG-lA
-     * <p>
+     *
      * Given a 2D matrix of 0s and 1s. Find largest rectangle of all 1s in this matrix.
-     * <p>
+     *
      * Maintain a temp array of same size as number of columns. Copy first row to this temp array and find largest
      * rectangular area for histogram. Then keep adding elements of next row to this temp array if they are not zero. If
      * they are zero then put zero there. Every time calculate max area in histogram.
-     * <p>
+     *
      * Time complexity - O(rows*cols) Space complexity - O(cols) - if number of cols is way higher than rows then do
      * this process for rows and not columns.
      */

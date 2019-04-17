@@ -17,32 +17,23 @@ import java.util.List;
  * Example:
  *
  * Input: nums = [1,2,3]
- * Output:
- * [
- * [3],
- * [1],
- * [2],
- * [1,2,3],
- * [1,3],
- * [2,3],
- * [1,2],
- * []
- * ]
+ * Output: 2 ^ n subsets
+ * [ [3], [1], [2], [1,2,3], [1,3], [2,3], [1,2], [] ]
  */
 public class SubSets_Permutations {
 
   public static List<List<String>> subsets(String[] nums) {
-    List<List<String>> list = new ArrayList<>();
-    backtrack(list, new ArrayList<>(), nums, 0);
-    return list;
+    List<List<String>> resultList = new ArrayList<>();
+    backtrack(resultList, new ArrayList<>(), nums, 0);
+    return resultList;
   }
 
-  private static void backtrack(List<List<String>> list, List<String> tempList, String[] nums, int start) {
+  private static void backtrack(List<List<String>> resultList, List<String> tempList, String[] nums, int start) {
     // It will Add Empty Array first. If you don't want, move this one into inside for loop
-    list.add(new ArrayList<>(tempList));
+    resultList.add(new ArrayList<>(tempList));
     for (int i = start; i < nums.length; i++) {
       tempList.add(nums[i]);
-      backtrack(list, tempList, nums, i + 1);
+      backtrack(resultList, tempList, nums, i + 1);
       tempList.remove(tempList.size() - 1);
     }
   }
@@ -58,17 +49,14 @@ public class SubSets_Permutations {
    *
    * Input: [1,2,2]
    * Output:
-   * [
-   * [2],
-   * [1],
-   * [1,2,2],
-   * [2,2],
-   * [1,2],
-   * []
-   * ]
+   * [ [2], [1], [1,2,2], [2,2], [1,2], [] ]
+   *
+   * Take the product of all the (frequencies + 1).
+   * For example, in {A,B,B}, the answer is (1+1) [the number of As] * (2+1) [the number of Bs] = 6.
+   * in {A, A, B, B}, count(A) = 2 and count(B) = 2. Thus the answer is (2+1) * (2+1) = 9.
    */
 
-  public static List<String[]> findUniqueCombinations(String[] inputArr) {
+  public static List<String[]> findUniqueSubSets(String[] inputArr) {
 
     List<String[]> resultList = new ArrayList<>();
     Arrays.sort(inputArr);
@@ -99,7 +87,7 @@ public class SubSets_Permutations {
    * Example:
    *
    * Input: [1,2,3]
-   * Output:
+   * Output: n! = 1 * 2 * 3 = 6
    * [
    * [1,2,3],
    * [1,3,2],
@@ -140,7 +128,8 @@ public class SubSets_Permutations {
    * Example:
    *
    * Input: [1,1,2]
-   * Output:
+   * Output: n! / frequencies! ^ no.of times
+   * e.g. {1, 1, 2, 2, 3, 3, 3} = 7! /  2! (1 and 2 occurs twice)) ^ 2 ( 1 and 2) * 3! (3 occurs 3 times) ^ 1
    * [
    * [1,1,2],
    * [1,2,1],
@@ -193,7 +182,7 @@ public class SubSets_Permutations {
    */
   public static List<List<Integer>> combinationSum(int[] nums, int target) {
     List<List<Integer>> list = new ArrayList<>();
-    Arrays.sort(nums);
+    //Arrays.sort(nums);
     backtrack(list, new ArrayList<>(), nums, target, 0);
     return list;
   }
@@ -302,6 +291,8 @@ public class SubSets_Permutations {
   }
 
   public static void main(String[] args) {
+
+    System.out.println("****************** Sub Sets **************************");
     String[] input = {"Carrots", "Lettuce", "Tomato"};
 
     List<List<String>> resultList = subsets(input);
@@ -310,16 +301,16 @@ public class SubSets_Permutations {
       System.out.println(res);
     }
 
-    System.out.println("**********************************************************");
+    System.out.println("******************* Unique Sub Sets *************************");
 
     String[] inputArr = {"Carrots", "Lettuce", "Tomato", "Carrots"};
-    List<String[]> resultArr = findUniqueCombinations(inputArr);
+    List<String[]> resultArr = findUniqueSubSets(inputArr);
 
     for (int i = 0; i < resultArr.size(); i++) {
       System.out.println(Arrays.toString(resultArr.get(i)));
     }
 
-    System.out.println("**********************************************************");
+    System.out.println("***************** Permutations **************************");
 
     int[] intArray = {1, 2, 3};
     List<List<Integer>> resArr = permutations(intArray);
@@ -328,7 +319,7 @@ public class SubSets_Permutations {
       System.out.println(res.toString());
     }
 
-    System.out.println("**********************************************************");
+    System.out.println("************** Unique Permutations ***********************");
 
     int[] dupArray = {1, 1, 2};
     List<List<Integer>> dupArrayList = uniquePermutations(dupArray);
@@ -337,25 +328,25 @@ public class SubSets_Permutations {
       System.out.println(res.toString());
     }
 
-    System.out.println("**********************************************************");
+    System.out.println("***************** Combinations Sum **********************");
 
-    int[] combSumArray = {2, 3, 6, 7, 2};
+    int[] combSumArray = {2, 3, 6, 7};
     List<List<Integer>> combSumList = combinationSum(combSumArray, 7);
 
     for (List<Integer> sum : combSumList) {
       System.out.println(sum.toString());
     }
 
-    System.out.println("**********************************************************");
+    System.out.println("***************** Unique Combinations Sum ****************");
 
-    int[] uniqueCombSum = {2, 5, 2, 1, 2};
+    int[] uniqueCombSum = {2, 5, 2, 1};
     List<List<Integer>> uniqueCombSumList = uniqueCombinationSum(uniqueCombSum, 5);
 
     for (List<Integer> sum : uniqueCombSumList) {
       System.out.println(sum.toString());
     }
 
-    System.out.println("**********************************************************");
+    System.out.println("***************** Palindrome Partition ******************");
 
     String inputStr = "aab";
     List<List<String>> partList = getPalindromePartition(inputStr);

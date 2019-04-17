@@ -45,8 +45,7 @@ public class maxSumSubArrayWithKNumbers {
         int result = sum;
         for (int i = k; i < n; i++)
         {
-            // Compute sum of k elements ending
-            // with a[i].
+            // Compute sum of k elements ending with a[i].
             sum = sum + a[i] - a[i-k];
 
             // Update result if required
@@ -62,8 +61,8 @@ public class maxSumSubArrayWithKNumbers {
     // Driver method
     public static void main(String[] args)
     {
-        int arr[] = {1, 2, 3, -10, -3};
-        int k = 4;
+        int arr[] = {-1, 1, 1, 1, 1, -1};
+        int k = 2;
         System.out.println(maxSumWithK(arr, arr.length, k));;
     }
 }
