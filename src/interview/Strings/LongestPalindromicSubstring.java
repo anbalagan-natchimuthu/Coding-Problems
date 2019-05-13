@@ -93,10 +93,10 @@ public class LongestPalindromicSubstring {
     int start = 0, end = 0;
 
     // One by one consider every character as center
-    // point of even and length palindromes
+    // point of even and odd length palindromes
     for (int i = 0; i < str.length(); i++) {
-      int len1 = expandAroundCenter(str, i, i);
-      int len2 = expandAroundCenter(str, i, i + 1);
+      int len1 = expandAroundCenter(str, i, i); // odd length
+      int len2 = expandAroundCenter(str, i, i + 1); // even length
       int len = Math.max(len1, len2);
       if (len > end - start) {
         start = i - (len - 1) / 2;

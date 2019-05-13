@@ -34,6 +34,8 @@ public class IsoMorphic {
             if (st1Array[s1.charAt(i)] != st2Array[s2.charAt(i)]) {
                 return false;
             }
+            // since integer array will be initialized with zero, we are assigning to i+1.
+            // We can also initialize int[] with -1, then we can assign i directly.
             st1Array[s1.charAt(i)] = i+1;
             st2Array[s2.charAt(i)] = i+1;
         }

@@ -1,4 +1,4 @@
-package interview;
+package interview.misc;
 
 /*implement database structure in Java (that would be multithreaded) 
 

@@ -40,6 +40,33 @@ public class LongestCommonSubsequence {
     return max;
   }
 
+  /**
+   * https://www.geeksforgeeks.org/longest-common-substring-dp-29/
+   *
+   * Problem: 2
+   * find Longest Contiguous Substring matching
+   * e.g.
+   * Str1[] = {"apple", "orange", "banana", "blueberry", "pears", "dates"}
+   * Str2[] = {"dates", "pears", "orange", "banana", "blueberry", "apple"}
+   * output: 3 "orange", "banana" and "blueberry"
+   */
+  public int longestContiguousSubstring(String str1[], String str2[]) {
+
+    int temp[][] = new int[str1.length + 1][str2.length + 1];
+    int max = 0;
+    for (int i = 1; i < temp.length; i++) {
+      for (int j = 1; j < temp[i].length; j++) {
+        if (str1[i - 1].equals(str2[j - 1])) {
+          temp[i][j] = temp[i - 1][j - 1] + 1;
+        }
+        if (temp[i][j] > max) {
+          max = temp[i][j];
+        }
+      }
+    }
+    return max;
+  }
+
   // ***************************************************************************
   // PROBLEM:2
     /*
@@ -126,6 +153,10 @@ public class LongestCommonSubsequence {
 
     int result = lcs.lcsDynamic(str1.toCharArray(), str2.toCharArray());
     System.out.println(result);
+
+    String[] s1 = new String[]{"apple", "orange", "banana", "blueberry", "pears", "dates"};
+    String[] s2 = new String[]{"dates", "pears", "orange", "banana", "blueberry", "apple"};
+    System.out.println("Longest Contiguous array elements : " + lcs.longestContiguousSubstring(s1, s2));
 
     System.out.println("Minimum Delete operation:" + lcs.minDistance("seau".toCharArray(), "eat".toCharArray()));
     System.out.println(

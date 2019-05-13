@@ -1,8 +1,9 @@
 package interview.tree;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
-import java.util.Stack;
 
 // Stack LIFO
 // Queue FIFO
@@ -49,10 +50,10 @@ public class LeftToRightLevelPrint {
         RightToLeftLevelPrint(root);
     }
 
-    public static void RightToLeftLevelPrint(Node root) {
+    public static void leftToRight(Node root) {
 
         Queue<Node> queue = new LinkedList<>();
-        Stack<Node> stack = new Stack<>();
+        List<Integer> list = new ArrayList<>();
 
         queue.add(root);
         while (!queue.isEmpty()) {
@@ -65,24 +66,24 @@ public class LeftToRightLevelPrint {
                 queue.add(temp.getRight());
             }
 
-            stack.push(temp);
+            list.add(temp.getData());
         }
 
-        System.out.println("******* Right to Left ********");
-        while (!stack.isEmpty()) {
-            System.out.print(stack.pop().data + "  ");
+        System.out.println("******* Left to Right ********");
+        for (int data : list) {
+            System.out.print(data + "  ");
         }
         System.out.println();
     }
 
-    private static void leftToRight(Node root) {
+    private static void RightToLeftLevelPrint(Node root) {
 
         if (root == null) {
             return;
         }
 
         Queue<Node> que = new LinkedList<>();
-        Stack<Node> stack = new Stack<>();
+        List<Integer> list = new ArrayList<>();
         que.add(root);
 
         while (!que.isEmpty()) {
@@ -94,11 +95,11 @@ public class LeftToRightLevelPrint {
             if (temp.getLeft() != null) {
                 que.add(temp.getLeft());
             }
-            stack.push(temp);
+            list.add(temp.getData());
         }
-        System.out.println("******* Left to right ********");
-        while (!stack.isEmpty()) {
-            System.out.print(stack.pop().getData() + "  ");
+        System.out.println("******* Right to Left ********");
+        for (int data : list) {
+            System.out.print(data + "  ");
         }
         System.out.println();
     }

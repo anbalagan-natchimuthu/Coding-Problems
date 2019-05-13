@@ -10,7 +10,7 @@ package interview.LinkedList;
  * Key to delete = 2
  * Output:  1 -> 8 -> 3 -> 7
  */
-public class DeleteNode {
+public class DeleteNodeAllOccurrences {
 
   public static void main(String[] args) {
     Node n0 = new Node(6);

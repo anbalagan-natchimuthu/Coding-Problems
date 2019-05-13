@@ -10,8 +10,8 @@ package interview.LinkedList;
  *
  * Input: 1->2->3->3->4->4->5
  * Output: 1->2->5
- * Example 2:
  *
+ * Example 2:
  * Input: 1->1->1->2->3
  * Output: 2->3
  */
@@ -47,6 +47,14 @@ public class RemoveDuplicates {
     return dummyHead.next;
   }
 
+  public static void printNode(ListNode head) {
+    ListNode dummy = head;
+    while (dummy != null) {
+      System.out.print(dummy.val + "->");
+      dummy = dummy.next;
+    }
+  }
+
   public static void main(String[] args) {
     ListNode n1 = new ListNode(1);
     ListNode n2 = new ListNode(2);
@@ -60,14 +68,14 @@ public class RemoveDuplicates {
     n3.next = n4;
     n4.next = n5;
     n5.next = n6;
+
+    System.out.println("\n\n****** Before Deleting Duplicates *********");
+    printNode(n1);
+    System.out.println("\n****** After Deleting Duplicates *********");
     ListNode resultNode = deleteDuplicates(n1);
+    printNode(resultNode);
 
-    while (resultNode != null) {
-      System.out.print(resultNode.val + "->");
-      resultNode = resultNode.next;
-    }
-
-    System.out.println();
+    System.out.println("\n\n");
 
     ListNode m1 = new ListNode(1);
     ListNode m2 = new ListNode(2);
@@ -81,12 +89,14 @@ public class RemoveDuplicates {
     m3.next = m4;
     m4.next = m5;
     m5.next = m6;
-    ListNode result = removeDuplicates(m1);
 
-    while (result != null) {
-      System.out.print(result.val + "->");
-      result = result.next;
-    }
+    System.out.println("\n****** Before Deleting Duplicates *********");
+    printNode(m1);
+    System.out.println("\n****** After Deleting Duplicates *********");
+    ListNode result = removeDuplicates(m1);
+    printNode(result);
+
+    System.out.println("\n\n");
   }
 
   /**

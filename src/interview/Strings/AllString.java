@@ -97,13 +97,8 @@ public class AllString {
     int i = 0;
     int j = input.length() - 1;
 
-    while (i < j) {
-      if (input.charAt(i) == input.charAt(j)) {
-        i++;
-        j--;
-      } else {
-        return false;
-      }
+    while (i < j && input.charAt(i++) != input.charAt(j--)) {
+      return false;
     }
     return true;
   }
