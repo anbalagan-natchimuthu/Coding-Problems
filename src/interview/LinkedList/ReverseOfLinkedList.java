@@ -27,6 +27,10 @@ public class ReverseOfLinkedList {
     }
   }
 
+  /**
+   * Print Reversed Linked List
+   * @param node
+   */
   private static void reverseOfLinkedList(Node node) {
 
     if (node == null) {
@@ -52,16 +56,19 @@ public class ReverseOfLinkedList {
     }
   }
 
+  /**
+   * Reverse a Linked List and Return Head Node
+   */
   private static Node reverse(Node head) {
     Node prev = null;
     Node curr = head;
-    Node next = head.next;
+    Node future = head.next;
 
-    while (next != null) {
+    while (future != null) {
       curr.next = prev;
       prev = curr;
-      curr = next;
-      next = next.next;
+      curr = future;
+      future = future.next;
     }
     curr.next = prev;
     //prev = curr;

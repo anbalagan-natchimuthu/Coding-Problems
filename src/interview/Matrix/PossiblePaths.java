@@ -1,6 +1,7 @@
 package interview.Matrix;
 
 /**
+ * PROBLEM: 1
  * https://www.geeksforgeeks.org/count-possible-paths-top-left-bottom-right-nxm-matrix/
  * Count all possible paths from top left to bottom right of a mXn matrix. The problem is to count all the possible
  * paths from top left to bottom right of a mXn matrix with the constraints that from each cell you can either move
@@ -59,9 +60,52 @@ public class PossiblePaths {
     return count[m - 1][n - 1];
   }
 
+  /**
+   * PROBLEM: 2
+   * https://leetcode.com/problems/minimum-path-sum/
+   *
+   * Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which minimizes
+   * the sum of all numbers along its path.
+   *
+   * Note: You can only move either down or right at any point in time.
+   *
+   * Example:
+   *
+   * Input:
+   * [
+   *   [1,3,1],
+   *   [1,5,1],
+   *   [4,2,1]
+   * ]
+   * Output: 7
+   * Explanation: Because the path 1→3→1→1→1 minimizes the sum.
+   */
+
+  public static int minPathSum(int[][] grid) {
+
+    // Fill first row (Can move from left to right direction only)
+    for (int j = 1; j < grid[0].length; j++) {
+      grid[0][j] = grid[0][j] + grid[0][j - 1];
+    }
+
+    // Fill first column (Can move from top to bottom direction only)
+    for (int i = 1; i < grid.length; i++) {
+      grid[i][0] = grid[i][0] + grid[i - 1][0];
+    }
+
+    // Fill remaining values
+    for (int i = 1; i < grid.length; i++) {
+      for (int j = 1; j < grid[0].length; j++) {
+        grid[i][j] = grid[i][j] + Math.min(grid[i][j - 1], grid[i - 1][j]);
+      }
+    }
+    return grid[grid.length - 1][grid[0].length - 1];
+  }
+
   // Driver program to test above function
   public static void main(String args[]) {
     System.out.println("numberOfPaths:" + numberOfPathsUsingDP(3, 3));
     System.out.println("numberOfPathsUsingRecursion:" + numberOfPathsUsingRecursion(3, 3));
+    System.out.println("minimum path sum::" + minPathSum(new int[][]{{1, 3, 1}, {1, 5, 1}, {4, 2, 1}}));
   }
 }

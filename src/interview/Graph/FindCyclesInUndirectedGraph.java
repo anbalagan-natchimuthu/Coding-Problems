@@ -6,6 +6,7 @@ import java.util.Map;
 public class FindCyclesInUndirectedGraph {
 
   static class Graph {
+
     int vertices, edges;
     Edge[] edgeArray;
 
@@ -20,6 +21,7 @@ public class FindCyclesInUndirectedGraph {
     }
 
     class Edge {
+
       int src;
       int dest;
     }
@@ -34,7 +36,7 @@ public class FindCyclesInUndirectedGraph {
 
   public static void union(int[] parent, int x, int y) {
     //int xset = find(parent, x);
-   // int yset = find(parent, y);
+    // int yset = find(parent, y);
     // make X parent as Y
     parent[x] = y;
   }
@@ -55,7 +57,7 @@ public class FindCyclesInUndirectedGraph {
 
     // Iterate through all edges of graph, find subset of both vertices of every edge, if both subsets are same, then
     // there is cycle in graph.
-    for (int i = 0; i <graph.edgeArray.length; i++) {
+    for (int i = 0; i < graph.edgeArray.length; i++) {
       int srcParent = find(parent, graph.edgeArray[i].src);
       int destParent = find(parent, graph.edgeArray[i].dest);
 
@@ -72,11 +74,12 @@ public class FindCyclesInUndirectedGraph {
    * https://www.geeksforgeeks.org/union-find-algorithm-set-2-union-by-rank/
    */
   Map<Integer, SubSet> lookupMap = new HashMap<>();
+
   public boolean is_Cycle_Detected_Undirected_Graph(Graph graph) {
 
     // Iterate through all edges of graph, find subset of both vertices of every edge, if both subsets are same, then
     // there is cycle in graph.
-    for (int i = 0; i <graph.edgeArray.length; i++) {
+    for (int i = 0; i < graph.edgeArray.length; i++) {
       SubSet src = makeSet(graph.edgeArray[i].src);
       SubSet dest = makeSet(graph.edgeArray[i].dest);
 
@@ -92,6 +95,7 @@ public class FindCyclesInUndirectedGraph {
   }
 
   class SubSet {
+
     int data;
     SubSet parent;
     int rank;
@@ -131,8 +135,7 @@ public class FindCyclesInUndirectedGraph {
     }
   }
 
-  public static void main (String[] args)
-  {
+  public static void main(String[] args) {
     FindCyclesInUndirectedGraph findCyclesInUndirectedGraph = new FindCyclesInUndirectedGraph();
         /* Let us create following graph
          0
@@ -155,19 +158,20 @@ public class FindCyclesInUndirectedGraph {
     graph.edgeArray[2].dest = 2;
 
     findCyclesInUndirectedGraph.lookupMap.clear();
-    if (is_Cycle_Detected_Union_Find(graph))
-      System.out.println( "graph contains cycle" );
-    else
-      System.out.println( "graph doesn't contain cycle" );
+    if (is_Cycle_Detected_Union_Find(graph)) {
+      System.out.println("graph contains cycle");
+    } else {
+      System.out.println("graph doesn't contain cycle");
+    }
 
+    if (findCyclesInUndirectedGraph.is_Cycle_Detected_Undirected_Graph(graph)) {
+      System.out.println("graph contains cycle");
+    } else {
+      System.out.println("graph doesn't contain cycle");
+    }
 
-    if (findCyclesInUndirectedGraph.is_Cycle_Detected_Undirected_Graph(graph))
-      System.out.println( "graph contains cycle" );
-    else
-      System.out.println( "graph doesn't contain cycle" );
-
-
-    V = 4; E = 3;
+    V = 4;
+    E = 3;
     Graph graph1 = new FindCyclesInUndirectedGraph.Graph(V, E);
 
     // add edge 0-1
@@ -183,9 +187,10 @@ public class FindCyclesInUndirectedGraph {
     graph1.edgeArray[2].dest = 3;
 
     findCyclesInUndirectedGraph.lookupMap.clear();
-    if (findCyclesInUndirectedGraph.is_Cycle_Detected_Undirected_Graph(graph1))
-      System.out.println( "graph contains cycle" );
-    else
-      System.out.println( "graph doesn't contain cycle" );
+    if (findCyclesInUndirectedGraph.is_Cycle_Detected_Undirected_Graph(graph1)) {
+      System.out.println("graph contains cycle");
+    } else {
+      System.out.println("graph doesn't contain cycle");
+    }
   }
 }

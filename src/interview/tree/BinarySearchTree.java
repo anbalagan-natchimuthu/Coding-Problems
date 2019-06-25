@@ -45,7 +45,7 @@ class BinaryNode {
 
 class BinaryTree {
 
-  private BinaryNode root;
+  BinaryNode root;
 
   public void add(BinaryNode currentnode) {
     if (root == null) {
@@ -156,76 +156,6 @@ class BinaryTree {
     return tree1.getValue() == tree2.getValue() && isSameTree(tree1.getLeftNode(), tree2.getLeftNode()) && isSameTree(
         tree1.getRightNode(), tree2.getRightNode());
   }
-
-  /***
-   * This Method is for Binary Search Tree
-   * https://www.youtube.com/watch?v=TIoCCStdiFo
-   * @param node1
-   * @param node2
-   */
-  public void findLeastCommonAncestor(BinaryNode node1, BinaryNode node2) {
-    System.out.println("LCA:" + findLCA(root, node1, node2).getValue());
-  }
-
-  private BinaryNode findLCA(BinaryNode currentRoot, BinaryNode node1, BinaryNode node2) {
-    if (currentRoot == null || node1 == null || node2 == null) {
-      return null;
-    }
-
-    if (Math.max(node1.getValue(), node2.getValue()) < currentRoot.getValue()) {
-      return findLCA(currentRoot.getLeftNode(), node1, node2);
-    } else if (Math.min(node1.getValue(), node2.getValue()) > currentRoot.getValue()) {
-      return findLCA(currentRoot.getRightNode(), node1, node2);
-    } else {
-      return currentRoot;
-    }
-  }
-
-  /**
-   * This method is for Binary Tree
-   * https://www.youtube.com/watch?v=13m9ZCB8gjw
-   */
-  public void findLowestCommonAncestor(BinaryNode node1, BinaryNode node2) {
-    System.out.println(
-        "LCA of Binary Tree:" + findLowestCommonAncestor(root, node1, node2).getValue() + " for nodes " + node1
-            .getValue() + ":" + node2.getValue());
-  }
-
-  private static BinaryNode findLowestCommonAncestor(BinaryNode root, BinaryNode node1, BinaryNode node2) {
-
-    if (root == null) {
-      return null;
-    }
-
-    /**
-     * If Node 'node1' or Node 'node2' is also the root, then the root itself is lowest common ancestor
-     */
-    if (root == node1 || root == node2) {
-      return root;
-    }
-
-    BinaryNode left = findLowestCommonAncestor(root.getLeftNode(), node1, node2);
-    BinaryNode right = findLowestCommonAncestor(root.getRightNode(), node1, node2);
-
-    /**
-     * If Node 'node1' and Node 'node2' lie in the left, their Lowest Common Ancestor is in the left.
-     * If Node 'node1' and Node 'node2' lie in the right,their Lowest Common Ancestor is in the right.
-     *
-     * Otherwise, root is the Lowest common ancestor.
-     */
-    if (left != null && right != null) {
-      return root;
-    }
-
-    /**
-     * We couldn't find the nodes
-     */
-    if (left == null && right == null) {
-      return null;
-    }
-
-    return (left != null) ? left : right;
-  }
 }
 
 public class BinarySearchTree {
@@ -246,10 +176,6 @@ public class BinarySearchTree {
     BinaryNode b2 = new BinaryNode(65);
     BinaryNode b3 = new BinaryNode(70, b2, b1);
     b.add(b3);
-
-    b.findLeastCommonAncestor(b2, b1);
-    b.findLowestCommonAncestor(b2, b1);
-    b.findLowestCommonAncestor(b2, new BinaryNode(1000));
 
     BinaryNode node1 = new BinaryNode(25);
     b.add(node1);

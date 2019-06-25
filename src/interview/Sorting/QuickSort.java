@@ -76,7 +76,7 @@ public class QuickSort {
 
             // Recursively sort elements before partition and after partition
             quickSort(arr, low, pi - 1);
-            quickSort(arr, pi, high);
+            quickSort(arr, pi+1, high);
         }
     }
 

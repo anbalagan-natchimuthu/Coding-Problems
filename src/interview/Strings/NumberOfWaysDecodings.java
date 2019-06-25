@@ -1,6 +1,9 @@
 package interview.Strings;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * https://www.youtube.com/watch?v=qli-JCrSwuk
@@ -55,9 +58,50 @@ public class NumberOfWaysDecodings {
     return returnVal;
   }
 
+  /**
+   * PROBLEM: 2
+   * Return all possible combinations for String 123 where 1 mapped to 'a', 2 mapped to 'b' and 26 mapped to 'z'.
+   * e.g. 123 {abc, aw, lc}
+   */
+
+  public static List<String> findAllCombinations(String str) {
+    List<String> resList = new ArrayList<>();
+    findCombinationsHelper(str, 0, resList, new ArrayList<>());
+    return resList;
+  }
+
+  private static void findCombinationsHelper(String str, int index, List<String> resList, List<Character> tempList) {
+    if (index == str.length()) {
+      resList.add(tempList.stream().map(e->e.toString()).collect(Collectors.joining()));
+      return;
+    }
+
+    int val = str.charAt(index) - '0';
+
+    if (val != 0) {
+      tempList.add((char) (val + 96));
+      findCombinationsHelper(str, index + 1, resList, tempList);
+      tempList.remove(tempList.size() - 1);
+    }
+
+    if ( index + 2 <= str.length()) {
+      val = Integer.parseInt(str.substring(index, index + 2));
+
+      if (val > 0 && val <= 26) {
+        tempList.add((char) (val + 96));
+        findCombinationsHelper(str, index + 2, resList, tempList);
+        tempList.remove(tempList.size() - 1);
+      }
+    }
+  }
+
   public static void main(String[] args) {
     NumberOfWaysDecodings solution = new NumberOfWaysDecodings();
     System.out.println("Result::" + solution.numDecodings("20"));
     System.out.println("Result::" + solution.numDecodings("11111"));
+
+
+    List<String> res = findAllCombinations("123");
+    System.out.println(res.toString());
   }
 }

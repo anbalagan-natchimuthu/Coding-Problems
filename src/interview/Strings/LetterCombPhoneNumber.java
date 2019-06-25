@@ -3,22 +3,34 @@ package interview.Strings;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * PROBLEM : 1
+ * PROBLEM : 1 Solution: 1
  * Given a digit string, return all possible letter combinations that the number could represent.
  * (Check out your cellphone to see the mappings) Input:Digit string "23", Output: ["ad", "ae", "af", "bd", "be",
  * "bf", "cd", "ce", "cf"].
  *
  * https://www.geeksforgeeks.org/find-possible-words-phone-digits/
+ *
+ * https://leetcode.com/problems/letter-combinations-of-a-phone-number/solution/
+ *
+ * Time complexity : O(3^N 4^M)
+ * where N is the number of digits in the input that maps to 3 letters (e.g. 2, 3, 4, 5, 6, 8)
+ * and M is the number of digits in the input that maps to 4 letters (e.g. 7, 9),
+ * and N+M is the total number digits in the input.
+ *
+ * Space complexity : O(3^N 4^M) since one has to keep 3^N  4^M solutions.
  */
 public class LetterCombPhoneNumber {
 
   public static void main(String[] args) {
     LetterCombPhoneNumber lc = new LetterCombPhoneNumber();
     System.out.println(lc.letterCombinations("23"));
+
+    System.out.println(letterCombinationsIterative("23"));
 
     List<List<Integer>> input = new ArrayList<>();
     input.add(Arrays.asList(1, 2, 3, 10));
@@ -69,6 +81,31 @@ public class LetterCombPhoneNumber {
       helper(digits, index + 1, dict, result, arr);
     }
   }
+
+  /**
+   * Solutions: 2
+   * For time complexity, adding one more letter, 4 (for number 7) times more operations, so it is O(4^n).
+   * For space complexity, final output will take O(4^n) space.
+   */
+  public static List<String> letterCombinationsIterative(String digits) {
+    LinkedList<String> ans = new LinkedList<>();
+    if (digits == null || digits.isEmpty() || digits.indexOf('0') != -1 || digits.indexOf('1') != -1) {
+      return ans;
+    }
+    String[] mapping = new String[]{"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    ans.add("");
+    for (int i = 0; i < digits.length(); i++) {
+      int x = Character.getNumericValue(digits.charAt(i));
+      while (ans.peek().length() == i) {
+        String t = ans.remove();
+        for (char s : mapping[x].toCharArray()) {
+          ans.add(t + s);
+        }
+      }
+    }
+    return ans;
+  }
+
 
   /**
    * PROBLEM : 2

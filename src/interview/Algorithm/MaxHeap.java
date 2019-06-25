@@ -3,7 +3,8 @@ package interview.Algorithm;
 import java.util.NoSuchElementException;
 
 /**
- * https://codepumpkin.com/heap/ https://www.youtube.com/watch?v=t0Cq6tVNRBA Created by 212438472 on 8/11/18.
+ * https://codepumpkin.com/heap/
+ * https://www.youtube.com/watch?v=t0Cq6tVNRBA
  */
 public class MaxHeap {
 

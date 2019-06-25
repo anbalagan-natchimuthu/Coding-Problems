@@ -35,6 +35,28 @@ public class Sqrt {
 		// with the defined precision
 		return (start + end) / 2;
 	}
+
+	/**
+	 * https://www.geeksforgeeks.org/write-a-c-program-to-calculate-powxn/
+	 */
+	public double power(double x, double y) {
+
+		double temp;
+		if (y == 0) {
+			return 1;
+		}
+		temp = power(x, y / 2);
+
+		if (y % 2 == 0) {
+			return temp * temp;
+		} else {
+			if (y > 0) {
+				return x * temp * temp;
+			} else {
+				return (temp * temp) / x;
+			}
+		}
+	}
 	
 	public static void main(String args[]) {
 		System.out.println(sqrt(0.3));

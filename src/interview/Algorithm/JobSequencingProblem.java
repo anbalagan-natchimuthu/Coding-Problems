@@ -1,7 +1,7 @@
 package interview.Algorithm;
 
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -73,13 +73,17 @@ class Scheduler {
     Arrays.fill(slot, -1);
 
     // arrange the jobs in decreasing order of their profits ( sort profit descending)
-    Collections.sort(jobs, (a, b) -> {
+    /*Collections.sort(jobs, (a, b) -> {
       if (a.getProfit() != b.getProfit()) {
         return b.getProfit() - a.getProfit();
       } else {
         return b.getDeadline() - a.getDeadline();
       }
-    });
+    });*/
+
+    //List<Jobs> jobsCopy = new ArrayList<>(jobs);
+
+    jobs.sort(Comparator.comparing(Jobs::getProfit).thenComparing(Jobs::getDeadline).reversed());
 
     // consider each job in decreasing order of their profits
     for (Jobs job : jobs) {

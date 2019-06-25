@@ -117,15 +117,14 @@ public class RemoveDuplicates {
     dummy.next = head;
 
     ListNode pre = dummy;
-    ListNode curr = head;
 
-    while (curr != null) {
-      while (curr.next != null && curr.val == curr.next.val) {
-        curr = curr.next;
+    while (head != null) {
+      while (head.next != null && head.val == head.next.val) {
+        head = head.next;
       }
 
-      pre.next = curr;
-      curr = curr.next;
+      pre.next = head;
+      head = head.next;
       pre = pre.next;
     }
     return dummy.next;

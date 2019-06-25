@@ -63,6 +63,19 @@ public class Diameter {
 
   // Driver code
   public static void main(String[] args) {
+
+    /*
+             1
+           /   \
+          2     3
+         / \
+        4  5
+       /  /
+      8  6
+      \  \
+       9  7
+     */
+
     Node root = newNode(1);
     root.left = newNode(2);
     root.right = newNode(3);

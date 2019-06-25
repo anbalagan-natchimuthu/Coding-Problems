@@ -3,6 +3,7 @@ package interview.Strings;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * PROBLEM: 1
@@ -97,23 +98,25 @@ public class SubSets_Permutations {
    * [3,2,1]
    * ]
    */
-  public static List<List<Integer>> permutations(int[] inputArray) {
-    List<List<Integer>> resultList = new ArrayList<>();
-    printPermutations(resultList, inputArray, new ArrayList<>());
+  public static List<String> permutations(String inputStr) {
+    List<String> resultList = new ArrayList<>();
+    printPermutations(resultList, inputStr, new ArrayList<>());
     return resultList;
   }
 
-  public static void printPermutations(List<List<Integer>> resultList, int[] inputArray, List<Integer> tempList) {
-    if (tempList.size() == inputArray.length) {
-      resultList.add(new ArrayList<>(tempList));
+  public static void printPermutations(List<String> resultList, String inputStr, List<Character> tempList) {
+    if (tempList.size() == inputStr.length()) {
+      resultList.add(tempList.stream() // Stream<Character>
+          .map(String::valueOf) // Stream<String>
+          .collect(Collectors.joining()));
     } else {
 
-      for (int i = 0; i < inputArray.length; i++) {
-        if (tempList.contains(inputArray[i])) {
+      for (int i = 0; i < inputStr.length(); i++) {
+        if (tempList.contains(inputStr.charAt(i))) {
           continue; // element already exists, skip
         }
-        tempList.add(inputArray[i]);
-        printPermutations(resultList, inputArray, tempList);
+        tempList.add(inputStr.charAt(i));
+        printPermutations(resultList, inputStr, tempList);
         tempList.remove(tempList.size() - 1);
       }
     }
@@ -290,6 +293,96 @@ public class SubSets_Permutations {
     return true;
   }
 
+  /**
+   * PROBLEM: 8
+   * Generate Combinations of Parentheses
+   *
+   * Write a method to return all valid combinations of n-pairs of parentheses.
+   *
+   * The method should return an ArrayList of strings, in which each string represents a valid combination of
+   * parentheses.
+   *
+   * The order of the strings in the ArrayList does not matter.
+   *
+   * Examples:
+   * combParenthesis(2) ==> {"(())","()()"}
+   *
+   * Note: Valid combination means that parentheses pairs are not left open. ")()(" is not a valid combination.
+   */
+
+  public static ArrayList<String> generateParentheses(int val) {
+    ArrayList<String> result = new ArrayList<>();
+    if (val > 0) {
+      parenthesesHelper(val, val, "", result);
+    }
+    return result;
+  }
+
+  private static void parenthesesHelper(int left, int right, String temp, ArrayList<String> result) {
+    if (left == 0 && right == 0) {
+      result.add(temp);
+    } else {
+      if (left > 0) {
+        parenthesesHelper(left - 1, right, temp + "(", result);
+      }
+
+      if (right > left) {
+        parenthesesHelper(left, right - 1, temp + ")", result);
+      }
+    }
+    return;
+  }
+
+  /**
+   * PROBLEM: 9
+   * You're given a 2D board which contains an m x n matrix of chars - char[][] board. Write a method - printPaths
+   * that prints all possible paths from the top left cell to the bottom right cell. Your method should return an
+   * ArrayList of Strings, where each String represents a path with characters appended in the order of movement.
+   * You're only allowed to move down and right on the board. The order of String insertion in the ArrayList does not
+   * matter.
+   *
+   * Example:
+   *
+   * Input Board :
+   * {
+   *     {A, X},
+   *     {D, E}
+   * }
+   * Output: ["ADE", "AXE"]
+   *
+   */
+
+  public static ArrayList<String> printPaths(char[][] board) {
+
+    ArrayList<String> result = new ArrayList<>();
+    if (board == null) {
+      return result;
+    }
+    printPaths(board, result, new StringBuilder(), 0, 0);
+    return result;
+  }
+
+  private static void printPaths (char[][] board, ArrayList<String> result, StringBuilder temp, int i, int j) {
+
+    if (i < 0 || j < 0 || i > board.length - 1 || j > board[0].length - 1) {
+      return;
+    }
+
+    temp.append(board[i][j]);
+
+    if (i == board.length - 1 && j == board[0].length - 1) {
+      result.add(temp.toString());
+      temp.deleteCharAt(temp.length() - 1);
+      return;
+    }
+
+    printPaths(board, result, temp, i + 1, j);
+    printPaths(board, result, temp, i, j + 1);
+    temp.deleteCharAt(temp.length() - 1);
+
+    return;
+  }
+
   public static void main(String[] args) {
 
     System.out.println("****************** Sub Sets **************************");
@@ -312,11 +405,10 @@ public class SubSets_Permutations {
 
     System.out.println("***************** Permutations **************************");
 
-    int[] intArray = {1, 2, 3};
-    List<List<Integer>> resArr = permutations(intArray);
+    List<String> resArr = permutations("abcde");
 
-    for (List<Integer> res : resArr) {
-      System.out.println(res.toString());
+    for (String res : resArr) {
+      System.out.println(res);
     }
 
     System.out.println("************** Unique Permutations ***********************");
@@ -354,5 +446,13 @@ public class SubSets_Permutations {
     for (List<String> list : partList) {
       System.out.println(list.toString());
     }
+
+    System.out.println("***************** Valid Combination of Parentheses ******************");
+    ArrayList<String> res = generateParentheses(3);
+    System.out.println(res.toString());
+
+    System.out.println("***************** Print all Possible Paths ******************");
+    ArrayList<String> result = printPaths(new char[][] {{'A', 'B', 'C'}, {'D', 'E', 'F'}});
+    System.out.println(result.toString());
   }
 }

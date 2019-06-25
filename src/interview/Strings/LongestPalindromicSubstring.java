@@ -1,5 +1,8 @@
 package interview.Strings;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * PROBLEM :1
  * Given a string, find the longest substring which is palindrome.
@@ -11,6 +14,10 @@ public class LongestPalindromicSubstring {
     System.out.println("longestPalindrome:" + longestPalSubstring("abba"));
     System.out.println("Length is: " + longestPalSubstrUsingDB("abba"));
     System.out.println("longest Palindromic subsequence:" + longestPalindromicSubsequence("agbdba"));
+
+    System.out.println("Count of Palindromic Substrings in a String::" + countPalindromicSubStrings("aaa"));
+    System.out.println(
+        "Count of Unique Palindromic Substrings in a String::" + countUniquePalindromicSubStrings("aaa"));
   }
 
   // A utility function to print a substring str[low..high]
@@ -118,6 +125,87 @@ public class LongestPalindromicSubstring {
   }
 
   /**
+   * PROBLEM: 2
+   * https://leetcode.com/problems/palindromic-substrings/
+   * Given a string, your task is to count how many palindromic substrings in this string.
+   *
+   * The substrings with different start indexes or end indexes are counted as different substrings even they consist
+   * of same characters.
+   *
+   * Example 1:
+   *
+   * Input: "abc"
+   * Output: 3
+   * Explanation: Three palindromic strings: "a", "b", "c".
+   *
+   *
+   * Example 2:
+   *
+   * Input: "aaa"
+   * Output: 6
+   * Explanation: Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
+   */
+  public static int countPalindromicSubStrings(String s) {
+    boolean[][] table = new boolean[s.length()][s.length()];
+    int totalCount = 0;
+
+    // count for all single characters
+    for (int i = 0; i < s.length(); i++) {
+      table[i][i] = true;
+      totalCount++;
+    }
+
+    for (int i = 0; i < s.length() - 1; i++) {
+      if (s.charAt(i) == s.charAt(i + 1)) {
+        table[i][i + 1] = true;
+        totalCount++;
+      }
+    }
+
+    for (int len = 3; len <= s.length(); len++) {
+      for (int i = 0; i <= s.length() - len; i++) {
+        int j = i + len - 1;
+
+        if (s.charAt(i) == s.charAt(j) && table[i + 1][j - 1]) {
+          table[i][j] = true;
+          totalCount++;
+        }
+      }
+    }
+    return totalCount;
+  }
+
+  /**
+   * Count of Unique Polyndromic substrings
+   */
+  public static int countUniquePalindromicSubStrings(String s) {
+
+    Set<String> uniqueStrings = new HashSet<>();
+    int count = 0;
+
+    for (int i = 0; i < s.length() - 1; i++) {
+      count = expandAroundCenter(s, i, i, uniqueStrings, count);
+      count = expandAroundCenter(s, i, i + 1, uniqueStrings, count);
+    }
+    return count;
+  }
+
+  private static int expandAroundCenter(String s, int left, int right, Set<String> uniqueStrings, int count) {
+    while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+      if (!uniqueStrings.contains(s.substring(left, right + 1))) {
+        count++;
+        uniqueStrings.add(s.substring(left, right + 1));
+      }
+      left--;
+      right++;
+    }
+    return count;
+  }
+
+  /**
+   * PROBLEM: 3
+   * Given a string, find longest palindromic subsequence in this string.
+   * e.g. for input String "agbdba" return length as 5 (abdba)
    * https://www.youtube.com/watch?v=_nCsPn7_OgI
    */
   public static int longestPalindromicSubsequence(String inputString) {

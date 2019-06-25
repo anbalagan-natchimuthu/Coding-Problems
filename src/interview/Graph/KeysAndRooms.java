@@ -54,7 +54,7 @@ public class KeysAndRooms {
   public static boolean canVisitAllRooms(List<List<Integer>> rooms) {
     boolean[] seen = new boolean[rooms.size()];
     seen[0] = true;
-    Stack<Integer> stack = new Stack();
+    Stack<Integer> stack = new Stack<>();
     stack.push(0);
 
     //At the beginning, we have a todo list "stack" of keys to use.

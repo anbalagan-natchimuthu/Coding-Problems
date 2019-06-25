@@ -12,29 +12,33 @@ import java.util.Comparator;
 
 class Job {
 
-    int start;
+  int start;
 
-    int end;
+  public int getEnd() {
+    return end;
+  }
 
-    int profit;
+  int end;
 
-    Job(int start, int end, int profit) {
-        this.start = start;
-        this.end = end;
-        this.profit = profit;
-    }
+  int profit;
+
+  Job(int start, int end, int profit) {
+    this.start = start;
+    this.end = end;
+    this.profit = profit;
+  }
 }
 
 class FinishTimeComparator implements Comparator<Job> {
 
-    @Override
-    public int compare(Job arg0, Job arg1) {
-        if (arg0.end <= arg1.end) {
-            return -1;
-        } else {
-            return 1;
-        }
+  @Override
+  public int compare(Job arg0, Job arg1) {
+    if (arg0.end <= arg1.end) {
+      return -1;
+    } else {
+      return 1;
     }
+  }
 }
 
 /**
@@ -44,49 +48,43 @@ class FinishTimeComparator implements Comparator<Job> {
  */
 public class JobSchedulingProblem {
 
-    /**
-     * Sort the jobs by finish time. For every job find the first job which does not overlap with this job and see if
-     * this job profit plus profit till last non overlapping job is greater than profit till last job.
-     */
-    public int maximum(Job[] jobs) {
-        int T[] = new int[jobs.length];
-        //FinishTimeComparator comparator = new FinishTimeComparator();
-        //Arrays.sort(jobs, comparator);
-        Arrays.sort(jobs, (j1, j2) -> {
-            if (j1.end <= j2.end) {
-                return -1;
-            } else {
-                return 1;
-            }
-        });
+  /**
+   * Sort the jobs by finish time. For every job find the first job which does not overlap with this job and see if
+   * this job profit plus profit till last non overlapping job is greater than profit till last job.
+   */
+  public int maximum(Job[] jobs) {
+    int T[] = new int[jobs.length];
+    //FinishTimeComparator comparator = new FinishTimeComparator();
+    //Arrays.sort(jobs, comparator);
+    Arrays.sort(jobs, Comparator.comparingInt(Job::getEnd));
 
-        T[0] = jobs[0].profit;
-        for (int i = 1; i < jobs.length; i++) {
-            T[i] = jobs[i].profit;
-            for (int j = 0; j < i; j++) {
-                if (jobs[j].end <= jobs[i].start) {
-                    T[i] = Math.max(T[i], jobs[i].profit + T[j]);
-                }
-            }
+    T[0] = jobs[0].profit;
+    for (int i = 1; i < jobs.length; i++) {
+      T[i] = jobs[i].profit;
+      for (int j = 0; j < i; j++) {
+        if (jobs[j].end <= jobs[i].start) {
+          T[i] = Math.max(T[i], jobs[i].profit + T[j]);
         }
-        int maxVal = Integer.MIN_VALUE;
-        for (int val : T) {
-            if (maxVal < val) {
-                maxVal = val;
-            }
-        }
-        return maxVal;
+      }
     }
+    int maxVal = Integer.MIN_VALUE;
+    for (int val : T) {
+      if (maxVal < val) {
+        maxVal = val;
+      }
+    }
+    return maxVal;
+  }
 
-    public static void main(String args[]) {
-        Job jobs[] = new Job[6];
-        jobs[0] = new Job(1, 3, 5);
-        jobs[1] = new Job(2, 5, 6);
-        jobs[2] = new Job(4, 6, 5);
-        jobs[3] = new Job(6, 7, 4);
-        jobs[4] = new Job(5, 8, 11);
-        jobs[5] = new Job(7, 9, 2);
-        JobSchedulingProblem mp = new JobSchedulingProblem();
-        System.out.println(mp.maximum(jobs));
-    }
+  public static void main(String args[]) {
+    Job jobs[] = new Job[6];
+    jobs[0] = new Job(1, 3, 5);
+    jobs[1] = new Job(2, 5, 6);
+    jobs[2] = new Job(4, 6, 5);
+    jobs[3] = new Job(6, 7, 4);
+    jobs[4] = new Job(5, 8, 11);
+    jobs[5] = new Job(7, 9, 2);
+    JobSchedulingProblem mp = new JobSchedulingProblem();
+    System.out.println(mp.maximum(jobs));
+  }
 }
