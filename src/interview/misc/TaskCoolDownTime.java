@@ -71,38 +71,56 @@ public class TaskCoolDownTime {
    * Version: 1: Input char array and output print total no.of time.
    * Tasks could be done without original order
    * https://www.youtube.com/watch?v=LiF2vM_IoAg
+   * Time complexity: O(n log 26) -> O(n)
+   * Space complexity: O(26) -> O(1)
    */
   public static int leastInterval(char[] tasks, int n) {
-    int[] map = new int[26];
+
+    // Freq of tasks
+    int[] freq = new int[26];
     for (char c : tasks) {
-      map[c - 'A']++;
+      freq[c - 'A']++;
     }
-    PriorityQueue<Integer> queue = new PriorityQueue<>(26, Collections.reverseOrder());
-    for (int f : map) {
+
+    // Max Heap
+    PriorityQueue<Integer> pq = new PriorityQueue<>(26, Collections.reverseOrder());
+    for (int f : freq) {
       if (f > 0) {
-        queue.add(f);
+        pq.add(f);
       }
     }
+
+    // resultant time interval
     int time = 0;
-    while (!queue.isEmpty()) {
+
+    // iterate through pq until it's empty
+    while (!pq.isEmpty()) {
       int i = 0;
       List<Integer> remainingElemt = new ArrayList<>();
+
+      // iterate up to colling period n
       while (i <= n) {
-        if (!queue.isEmpty()) {
-          if (queue.peek() > 1) {
-            remainingElemt.add(queue.poll() - 1);
+        if (!pq.isEmpty()) {
+          if (pq.peek() > 1) {
+            // poll from pq
+            // add remaining freq instances into a remainingElemt arraylist
+            remainingElemt.add(pq.poll() - 1);
           } else {
-            queue.poll();
+            pq.poll();
           }
         }
         time++;
-        if (queue.isEmpty() && remainingElemt.size() == 0) {
+
+        // terminating the condition for the loop
+        if (pq.isEmpty() && remainingElemt.size() == 0) {
           break;
         }
         i++;
       }
+
+      // add remaining instances of tasks accounted for back to the pq
       for (int l : remainingElemt) {
-        queue.add(l);
+        pq.add(l);
       }
     }
     System.out.println("time::" + time);

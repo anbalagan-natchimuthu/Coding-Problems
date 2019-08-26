@@ -1,10 +1,13 @@
 package interview.Array;
+
+import static java.lang.Double.NaN;
+
 public class Sqrt {
 	// define method header
 	public static double sqrt(double a) {
 		// firstly check if a is non-negative value
 		if (a < 0)
-			return -1;
+			return NaN;
 		// also check if a==0 or a==1 because in these two cases sqrt(a) = a
 		if (a == 0 || a == 1)
 			return a;
@@ -39,7 +42,7 @@ public class Sqrt {
 	/**
 	 * https://www.geeksforgeeks.org/write-a-c-program-to-calculate-powxn/
 	 */
-	public double power(double x, double y) {
+	public static double power(double x, int y) {
 
 		double temp;
 		if (y == 0) {
@@ -59,10 +62,15 @@ public class Sqrt {
 	}
 	
 	public static void main(String args[]) {
+		System.out.println(sqrt(-9) + "::" + Math.sqrt(-9));
 		System.out.println(sqrt(0.3));
 		System.out.println(sqrt(1.8));
 		System.out.println(sqrt(25));
 		System.out.println(sqrt(23));
 		System.out.println(sqrt(4));
+
+		System.out.println(power(4, 2) + "::" + Math.pow(4, 2));
+		System.out.println(power(4.2, 2) + "::" + Math.pow(4.2, 2));
+		System.out.println(power(2, -3) + "::" + Math.pow(2, -3));
 	}
 }

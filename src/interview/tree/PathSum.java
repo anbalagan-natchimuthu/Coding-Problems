@@ -16,7 +16,7 @@ public class PathSum {
      *               6
      */
 
-    int[] path = new int[256];
+    ArrayList<Integer> path = new ArrayList<>();
     TreeNode treeNode = TreeNode.dummyTree();
 
     System.out.println("******* Calculate path for the given sum *******");
@@ -33,32 +33,32 @@ public class PathSum {
     System.out.println(pathSum.rangeList);
   }
 
-  public static void calcPaths(TreeNode node, int[] path, int pathLen, int sum, int actualSum) {
+  public static void calcPaths(TreeNode node, ArrayList<Integer> path, int i, int sum, int actualSum) {
     if (node == null) {
       return;
     }
-    path[pathLen] = node.getData();
-    pathLen++;
+    path.add(i, node.getData());
+    i++;
     actualSum = actualSum + node.getData();
 
     if (node.getLeft() == null && node.getRight() == null) {
       if (sum == actualSum) {
-        printPath(path, pathLen);
+        printPath(path, i);
       }
     } else {
       if (node.getLeft() != null) {
-        calcPaths(node.getLeft(), path, pathLen, sum, actualSum);
+        calcPaths(node.getLeft(), path, i, sum, actualSum);
       }
 
       if (node.getRight() != null) {
-        calcPaths(node.getRight(), path, pathLen, sum, actualSum);
+        calcPaths(node.getRight(), path, i, sum, actualSum);
       }
     }
   }
 
-  public static void printPath(int[] path, int pathLen) {
+  public static void printPath(ArrayList<Integer> path, int pathLen) {
     for (int i = pathLen - 1; i >= 0; i--) {
-      System.out.print(path[i] + " ");
+      System.out.print(path.get(i) + " ");
     }
     System.out.println();
   }

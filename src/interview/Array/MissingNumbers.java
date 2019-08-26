@@ -120,6 +120,18 @@ public class MissingNumbers {
    * PROBLEM : 2 Find missing numbers
    * <p>
    * https://www.geeksforgeeks.org/find-four-missing-numbers-array-containing-elements-1-n/
+   *
+   * Given an array of unique integers where each integer of the given array lies in the range [1, N]. The size of
+   * array is (N-4). No Single element is repeated. Hence four numbers from 1 to N are missing in the array. Find the
+   * 4 missing numbers in sorted order.
+   *
+   * Examples:
+   *
+   * Input : arr[] = {2, 5, 6, 3, 9}
+   * Output : 1 4 7 8
+   *
+   * Input : arr[] = {1, 7, 3, 13, 5, 10, 8, 4, 9}
+   * Output : 2 6 11 12
    */
 
   private void missingNumbers(int[] arr) {

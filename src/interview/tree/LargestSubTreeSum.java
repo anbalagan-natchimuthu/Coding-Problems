@@ -9,15 +9,6 @@ public class LargestSubTreeSum {
     Node left, right;
   }
 
-  static class INT {
-
-    int v;
-
-    INT(int a) {
-      v = a;
-    }
-  }
-
   // Function to create new tree node.
   static Node newNode(int key) {
     Node temp = new Node();
@@ -26,8 +17,10 @@ public class LargestSubTreeSum {
     return temp;
   }
 
+  static int ans = Integer.MIN_VALUE;
+
   // Helper function to find largest subtree sum recursively.
-  static int findLargestSubtreeSumUtil(Node root, INT ans) {
+  static int findLargestSubtreeSumUtil(Node root) {
 
     // If current node is null then return 0 to parent node.
     if (root == null) {
@@ -35,10 +28,10 @@ public class LargestSubTreeSum {
     }
 
     // Subtree sum rooted at current node.
-    int currSum = root.key + findLargestSubtreeSumUtil(root.left, ans) + findLargestSubtreeSumUtil(root.right, ans);
+    int currSum = root.key + findLargestSubtreeSumUtil(root.left) + findLargestSubtreeSumUtil(root.right);
 
     // Update answer if current subtree sum is greater than answer so far.
-    ans.v = Math.max(ans.v, currSum);
+    ans = Math.max(ans, currSum);
 
     // Return current subtree sum to its parent node.
     return currSum;
@@ -51,13 +44,10 @@ public class LargestSubTreeSum {
       return 0;
     }
 
-    // Variable to store maximum subtree sum.
-    INT ans = new INT(Integer.MIN_VALUE);
-
     // Call to recursive function to find maximum subtree sum.
-    findLargestSubtreeSumUtil(root, ans);
+    findLargestSubtreeSumUtil(root);
 
-    return ans.v;
+    return ans;
   }
 
   // Driver Code
@@ -69,7 +59,7 @@ public class LargestSubTreeSum {
        -2	    3
       / \	   / \
     /   \   /   \
-   4	  5 -6	   2
+   4	  5 -6	   4
 	*/
 
     Node root = newNode(1);
@@ -78,7 +68,7 @@ public class LargestSubTreeSum {
     root.left.left = newNode(4);
     root.left.right = newNode(5);
     root.right.left = newNode(-6);
-    root.right.right = newNode(2);
+    root.right.right = newNode(4);
 
     System.out.println(findLargestSubtreeSum(root));
   }

@@ -25,6 +25,9 @@ public class TilingProblem {
     System.out.println("Number of ways = " + countWays(n, m));
   }
 
+  /**
+   * Count the number of ways to tile the floor of size n x m using 1 x m size tiles
+   */
   public static int countWays(int n, int m) {
 
     int[] count = new int[n + 1];

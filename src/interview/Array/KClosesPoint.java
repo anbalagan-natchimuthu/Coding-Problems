@@ -99,7 +99,7 @@ public class KClosesPoint {
    */
   public int[][] kClosestPoints(int[][] points, int K) {
     // Max Heap
-    PriorityQueue<int[]> pq = new PriorityQueue<>(
+    PriorityQueue<int[]> pq = new PriorityQueue<>(K+1,
         (p1, p2) -> p2[0] * p2[0] + p2[1] * p2[1] - p1[0] * p1[0] - p1[1] * p1[1]);
 
     for (int[] p : points) {

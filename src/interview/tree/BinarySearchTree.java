@@ -132,7 +132,7 @@ class BinaryTree {
       return true;
     }
 
-    if (low < rootNode.getValue() && high > rootNode.getValue()) {
+    if (low <= rootNode.getValue() && high > rootNode.getValue()) {
       return isBinarySearchTree(rootNode.getLeftNode(), low, rootNode.getValue()) && isBinarySearchTree(
           rootNode.getRightNode(), rootNode.getValue(), high);
     } else {

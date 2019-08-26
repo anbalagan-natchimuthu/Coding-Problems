@@ -1,7 +1,6 @@
 package interview.Array;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/
@@ -27,6 +26,10 @@ import java.util.Comparator;
  * Explanation:
  * One way is to shoot one arrow for example at x = 6 (bursting the balloons [2,8] and [1,6]) and another arrow at x
  * = 11 (bursting the other two balloons).
+ *
+ * Time complexity : O(NlogN) because of sorting of input data.
+ *
+ * Space complexity : O(1) since it's a constant space solution.
  */
 public class FindMinArrowShots {
 
@@ -39,14 +42,19 @@ public class FindMinArrowShots {
     if (points == null || points.length == 0) {
       return 0;
     }
-    Arrays.sort(points, Comparator.comparingInt(a -> a[0]));
 
-    int[] point = points[0];
+    //Sort the balloons by end coordinate x_end.
+    //Arrays.sort(points, Comparator.comparingInt(a -> a[1]));
+    Arrays.sort(points, (a, b) -> a[1] - b[1]);
+
+    int firstEnd = points[0][1];
     int count = 1;
     for (int i = 1; i < points.length; i++) {
-      if (points[i][0] > point[1]) {
+      // if the current balloon starts after the end of another one,
+      // one needs one more arrow
+      if (firstEnd < points[i][0]) {
         count++;
-        point = points[i];
+        firstEnd = points[i][1];
       }
     }
     return count;

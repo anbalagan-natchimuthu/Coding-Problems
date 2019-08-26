@@ -28,7 +28,10 @@ public class countPairsWithDiffK {
 
     count = countPairsWithKDiff(new int[]{1, 3, 1, 3, 5, 4, 4}, 0);
     System.out.println("count::" + count);
-    System.out.println("count::" + findPairs(new int[]{3, 1, 3, 1, 5, 4, 4, 1, 1}, 0));
+    System.out.println("count::" + findPairs(new int[]{1, 3, 1, 3, 5, 4, 4}, 0));
+
+    count = countPairsWithKDiff(new int[]{1, 1, 3, 4, 5, 3}, 2);
+    System.out.println("count::" + count);
     System.out.println("count::" + findPairs(new int[]{1, 1, 3, 4, 5, 3}, 2));
   }
 
@@ -39,14 +42,23 @@ public class countPairsWithDiffK {
     int l = 0;
     int r = 0;
     while (r < arr.length) {
-      if (arr[r] - arr[l] == diff) {
-        if (diff == 0 && l == r) {
-          r++;
-        } else {
-          count++;
+      if (l != r && arr[r] - arr[l] == diff) {
+        int tempCount = 0;
+        int tempLeft = arr[l];
+        l++;
+        while (tempLeft == arr[l]) {
+          tempCount++;
           l++;
+        }
+
+        int tempRight = arr[r];
+        r++;
+        while (r < arr.length && tempRight == arr[r]) {
+          tempCount++;
           r++;
         }
+        count += (Math.pow(2, tempCount));
+
       } else if (arr[r] - arr[l] > diff) {
         l++;
       } else // arr[r] - arr[l] < sum

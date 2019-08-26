@@ -3,6 +3,7 @@ package interview.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -111,13 +112,15 @@ public class MergeIntervals {
    * Simple approach without Interval object
    */
   public static int[][] mergeIntervals(int[][] arr) {
-    Arrays.sort(arr, (i1, i2) -> {
+    /*Arrays.sort(arr, (i1, i2) -> {
       if (i1[0] != i2[0]) {
         return i1[0] - i2[0];
       } else {
         return i2[1] - i1[1];
       }
-    });
+    });*/
+
+    Arrays.sort(arr, Comparator.comparingInt(arr1 -> arr1[0]));
 
     List<int[]> result = new ArrayList<>();
     int[] merge = arr[0];

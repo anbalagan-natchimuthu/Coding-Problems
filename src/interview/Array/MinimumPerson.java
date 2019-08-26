@@ -5,7 +5,8 @@ import java.util.Arrays;
 /**
  * Given job start and end times of all the job for a day, find the minimum number of people required for the job so
  * that no job overlap for a person. We are given two arrays which represent start and end times of jobs. Examples:
- * Input:  start[]  = {9:00,  9:40, 9:50,  11:00, 15:00, 18:00} end[]  =   {9:10, 12:00, 11:20, 11:30, 19:00, 20:00}
+ * Input:  start[]  = {9:00,  9:40, 9:50,  11:00, 15:00, 18:00}
+ * end[]  =   {9:10, 12:00, 11:20, 11:30, 19:00, 20:00}
  * Output: 3
  */
 public class MinimumPerson {

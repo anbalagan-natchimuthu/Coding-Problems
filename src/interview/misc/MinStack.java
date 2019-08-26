@@ -22,7 +22,7 @@ import java.util.Stack;
 public class MinStack {
 
   int min = Integer.MAX_VALUE;
-  Stack<Integer> stack = new Stack<Integer>();
+  Stack<Integer> stack = new Stack<>();
 
   public void push(int x) {
     // only push the old minimum value when the current
@@ -34,12 +34,14 @@ public class MinStack {
     stack.push(x);
   }
 
-  public void pop() {
+  public int pop() {
     // if pop operation could result in the changing of the current minimum value,
     // pop twice and change the current minimum value to the last minimum value.
-    if (stack.pop() == min) {
+    int returnVal = stack.pop();
+    if (returnVal == min) {
       min = stack.pop();
     }
+    return returnVal;
   }
 
   public int top() {

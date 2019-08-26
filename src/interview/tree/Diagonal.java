@@ -33,17 +33,17 @@ public class Diagonal {
   private static void printDiagonal(Node root) {
     Queue<Node> queue = new LinkedList<>();
     queue.add(root);
-    queue.add(null);
+    //queue.add(null);
 
     while (!queue.isEmpty()) {
       Node temp = queue.remove();
-      if (temp == null) {
+      /*if (temp == null) {
         queue.add(null);
         temp = queue.remove();
         if (temp == null) {
           break;
         }
-      }
+      }*/
 
       while (temp != null) {
         System.out.print(temp.data + " ");

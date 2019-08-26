@@ -1,5 +1,8 @@
 package interview.Array;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * https://www.geeksforgeeks.org/minimum-adjacent-swaps-to-move-maximum-and-minimum-to-corners/
  * Given N number of elements, find the minimum number of swaps required so that the maximum element is at the
@@ -25,8 +28,8 @@ public class MinimumAdjacentSwaps {
 
   // PROBLEM : 1
   public static void minimumSwaps(int a[], int n) {
-    int maxx = Integer.MIN_VALUE, minn = Integer.MAX_VALUE, l = 0, r = 0;
-    for (int i = 0; i < n; i++) {
+    int maxx = a[0], minn = a[0], l = 1, r = 1;
+    for (int i = 1; i < n; i++) {
 
       // Index of leftmost largest element
       if (a[i] > maxx) {
@@ -48,7 +51,7 @@ public class MinimumAdjacentSwaps {
   }
 
   /**
-   * PROBLEM: 2
+   * PROBLEM: 2 Version: 1
    * https://leetcode.com/problems/couples-holding-hands/
    *
    * N couples sit in 2N seats arranged in a row and want to hold hands. We want to know the minimum number of
@@ -71,6 +74,10 @@ public class MinimumAdjacentSwaps {
    * Input: row = [3, 2, 0, 1]
    * Output: 0
    * Explanation: All couples are already seated side by side.
+   *
+   * Time Complexity: O(N^2), where NN is the number of couples.
+   *
+   * Space Complexity: O(1) additional complexity: the swaps are in place.
    */
 
   public static int minSwapsCouples(int[] row) {
@@ -95,6 +102,35 @@ public class MinimumAdjacentSwaps {
     return swaps;
   }
 
+  /**
+   * VERSION: 2
+   * Time Complexity: O(N)
+   * Space Complexity: O(N)
+   */
+  public static int minSwapsCouplesUsingMap(int[] row) {
+
+    int swaps = 0;
+
+    Map<Integer, Integer> map = new HashMap<>();
+    for (int i = 0; i < row.length; i++) {
+      map.put(row[i], i);
+    }
+
+    for (int i = 0; i < row.length; i += 2) {
+      int x = row[i];
+      if (row[i + 1] == (x ^ 1)) {
+        continue;
+      }
+      swaps++;
+
+      int pos = map.get(x^1);
+      int temp = row[i+1];
+      row[i+1] = row[pos];
+      row[pos] = temp;
+    }
+    return swaps;
+  }
+
   // Driver Code
   public static void main(String args[]) {
     int a[] = {5, 6, 1, 3};
@@ -103,5 +139,7 @@ public class MinimumAdjacentSwaps {
 
     int res = minSwapsCouples(new int[]{5, 0, 2, 4, 3, 1});
     System.out.println(res);
+
+    System.out.println(minSwapsCouplesUsingMap(new int[]{5, 0, 2, 4, 3, 1}));
   }
 }

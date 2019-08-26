@@ -75,12 +75,9 @@ public class MinimumJumps {
     System.out.println("....Actual Jump Steps....");
     int location = actualJump.length - 1;
     System.out.print(location + " ");
-    while (true) {
+    while (location != 0) {
       System.out.print(" " + actualJump[location] + " ");
       location = actualJump[location];
-      if (location == 0) {
-        break;
-      }
     }
     System.out.println();
     return jumps[arr.length - 1];

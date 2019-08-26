@@ -87,7 +87,7 @@ public class PascalsTriangle {
     int[] result = new int[rows + 1];
     result[0] = 1;
 
-    for (int row = 1; row < rows + 1; row++) {
+    for (int row = 1; row <= rows; row++) {
       for (int j = row; j >= 1; j--) {
         result[j] += result[j - 1];
       }

@@ -28,7 +28,7 @@ public class LowestMaxVisitsNumberInArray {
   // Get Lowest starting and Highest ending from the given input
   private static void getMaxMinInArray(List<Integer> inputList) {
     MaxMin.max = inputList.stream().mapToInt(v -> v).max().orElseThrow(NoSuchElementException::new);
-    MaxMin.min = inputList.stream().mapToInt(v -> v).min().orElseThrow(NoSuchElementException::new);
+    MaxMin.min = inputList.stream().mapToInt(v -> v).min().getAsInt();
   }
 
   // Construct the Class with start and End point from the list of input
@@ -54,7 +54,7 @@ public class LowestMaxVisitsNumberInArray {
         outputArray[startEnd.end - MaxMin.min + 1] -= 1;
       } else {
         outputArray[startEnd.end - MaxMin.min] += 1;
-        outputArray[startEnd.start - MaxMin.min + 1] -= 1;
+        outputArray[startEnd.start - MaxMin.min - 1] -= 1;
       }
     }
     return outputArray;
@@ -83,7 +83,7 @@ public class LowestMaxVisitsNumberInArray {
     list.add(4);
     list.add(3);
     list.add(6);
-    list.add(2);
+    list.add(4);
     long smillis = System.currentTimeMillis();
 
    // System.out.println(list.stream().mapToInt(Integer::intValue).max().getAsInt());

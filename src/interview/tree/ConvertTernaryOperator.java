@@ -1,70 +1,82 @@
 package interview.tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
+/**
+ * https://www.geeksforgeeks.org/convert-ternary-expression-binary-tree/
+ */
 public class ConvertTernaryOperator {
-    // Function to convert Ternary Expression to a Binary
-    // Tree. It return the root of tree
-    public CharNode convertExpression(char[] expression, int i) {
-        // Base case
-        if (i >= expression.length) {
-            return null;
-        }
 
-        // store current character of expression_string
-        // [ 'a' to 'z']
-        CharNode root = new CharNode(expression[i]);
+  // Function to convert Ternary Expression to a Binary
+  // Tree. It return the root of tree
+  CharNode convertExpression(String str) {
+    return convertExpression(str.toCharArray(), 0, str.length() - 1);
+  }
 
-        // Move ahead in str
-        ++i;
+  CharNode convertExpression(char str[], int s, int e) {
 
-        // if current character of ternary expression is '?'
-        // then we add next character as a left child of
-        // current node
-        if (i < expression.length && expression[i] == '?') {
-            root.left = convertExpression(expression, i + 1);
-        }
-
-        // else we have to add it as a right child of
-        // current node expression.at(0) == ':'
-        else if (i < expression.length) {
-            root.right = convertExpression(expression, i + 1);
-        }
-
-        return root;
+    if (s > e) {
+      return null;
     }
 
-    // function print tree
-    public void printTree(CharNode root) {
-        if (root == null) {
-            return;
+    if (s == e) {
+      return new CharNode(str[s]);
+    }
+
+    CharNode root = new CharNode(str[s]);
+
+    root.right = new CharNode(str[e]);
+
+    root.left = convertExpression(str, s + 2, e - 2);
+
+    return root;
+  }
+
+  // function print tree
+  public void printTree(CharNode root) {
+
+    Queue<CharNode> q = new LinkedList<>();
+    q.add(root);
+
+    while (!q.isEmpty()) {
+      int size = q.size();
+      while (size-- > 0) {
+        CharNode temp = q.remove();
+        System.out.print(temp.data + " ");
+
+        if (temp.left != null) {
+          q.add(temp.left);
         }
 
-        System.out.print(root.data + " ");
-        printTree(root.left);
-        printTree(root.right);
+        if (temp.right != null) {
+          q.add(temp.right);
+        }
+      }
+      System.out.println();
     }
+  }
 
-    // Driver program to test above function
-    public static void main(String args[]) {
-        String exp = "a?b?c:d:e";
-        ConvertTernaryOperator tree = new ConvertTernaryOperator();
-        char[] expression = exp.toCharArray();
-        CharNode root = tree.convertExpression(expression, 0);
-        tree.printTree(root);
-    }
+  // Driver program to test above function
+  public static void main(String args[]) {
+    String exp = "a?b?c:d:e";
+    ConvertTernaryOperator tree = new ConvertTernaryOperator();
+    CharNode root = tree.convertExpression(exp);
+    tree.printTree(root);
+  }
 }
 
 // Class to represent Tree node
-class CharNode
-{
-    char data;
+class CharNode {
 
-    CharNode left;
-    CharNode right;
+  char data;
 
-    public CharNode(char item)
-    {
-        data = item;
-        left = null;
-        right = null;
-    }
+  CharNode left;
+  CharNode right;
+
+  public CharNode(char item) {
+    data = item;
+    left = null;
+    right = null;
+  }
 }

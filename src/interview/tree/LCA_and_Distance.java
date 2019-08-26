@@ -50,11 +50,15 @@ public class LCA_and_Distance {
   }
 
   /***
-   * PROBLEM: 2
+   * PROBLEM: 2 Recursive Approach
    * This Method is for Binary Search Tree
    * https://www.youtube.com/watch?v=TIoCCStdiFo
-   * @param node1
-   * @param node2
+   *
+   * Time Complexity: O(N), where N is the number of nodes in the BST. In the worst case we might be visiting
+   * all the nodes of the BST.
+   *
+   * Space Complexity: O(N). This is because the maximum amount of space utilized by the recursion stack would be
+   * N since the height of a skewed BST could be N.
    */
   public static void LCA_Binary_Search_Tree(BinaryNode root, BinaryNode node1, BinaryNode node2) {
     System.out.println("LCA:" + LCA_Binary_Search_Tree_Helper(root, node1, node2).getValue());
@@ -71,6 +75,27 @@ public class LCA_and_Distance {
       return LCA_Binary_Search_Tree_Helper(currentRoot.getRightNode(), node1, node2);
     } else {
       return currentRoot;
+    }
+  }
+
+  /***
+   * PROBLEM: 2.1 Iterative Approach
+   * This Method is for Binary Search Tree
+   * https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/solution/
+   * @param node1
+   * @param node2
+   */
+  public static void LCA_Binary_Search_Tree_iterative(BinaryNode currentRoot, BinaryNode node1, BinaryNode node2) {
+
+    while (currentRoot != null) {
+      if (Math.max(node1.getValue(), node2.getValue()) < currentRoot.getValue()) {
+        currentRoot = currentRoot.getLeftNode();
+      } else if (Math.min(node1.getValue(), node2.getValue()) > currentRoot.getValue()) {
+        currentRoot = currentRoot.getRightNode();
+      } else {
+        System.out.println("LCA Iterative:" + currentRoot.getValue());
+        return;
+      }
     }
   }
 
@@ -133,8 +158,11 @@ public class LCA_and_Distance {
     b.add(b3);
 
     LCA_Binary_Search_Tree(b.root, b2, b1);
+    LCA_Binary_Search_Tree_iterative(b.root, b2, b1);
+
     LCA_Binary_Tree(b.root, b2, b1);
     LCA_Binary_Tree(b.root, b2, new BinaryNode(1000));
+
     int dist = distBetweenTwoNodes(b.root, b2, b1);
     System.out.println("distance between Node : " + b2.getValue() + " and Node: " + b1.getValue() + " is = " + dist);
 

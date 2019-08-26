@@ -3,7 +3,7 @@ package interview.tree;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class InsertNode {
+public class InsertNewNodeAtSpecificLevel {
 
   /**
    * Insert New node at specific Level and push all nodes at that level to down

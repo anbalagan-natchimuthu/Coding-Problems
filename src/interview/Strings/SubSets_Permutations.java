@@ -330,7 +330,6 @@ public class SubSets_Permutations {
         parenthesesHelper(left, right - 1, temp + ")", result);
       }
     }
-    return;
   }
 
   /**

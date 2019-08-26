@@ -88,7 +88,7 @@ class MyBlockingQueue<E> {
 
   public E take() throws InterruptedException {
     lock.lock();
-    E e = null;
+    E e;
     try {
       while (queue.size() == 0) {
         notEmpty.await();

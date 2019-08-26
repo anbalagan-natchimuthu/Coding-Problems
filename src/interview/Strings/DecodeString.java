@@ -38,7 +38,8 @@ public class DecodeString {
 
             int count = 0;
             while (Character.isDigit(encodedStr.charAt(i))) {
-                count = count * 10 + (encodedStr.charAt(i) - '0');
+                count = count * 10 + Character.getNumericValue(encodedStr.charAt(i));
+                //count = count * 10 + (encodedStr.charAt(i) - '0');
                 i++;
             }
 

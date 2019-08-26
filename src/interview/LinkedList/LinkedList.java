@@ -26,41 +26,6 @@ public class LinkedList {
       headNode = headNode.getNext();
     }
     System.out.println();
-    System.out.println("*************Reversed Linked List Iterative Way***********");
-
-    CrunchifyLinkedList lList1 = new CrunchifyLinkedList();
-
-    // add elements to LinkedList
-    lList1.add("10");
-    lList1.add("20");
-    lList1.add("30");
-    lList1.add("40");
-    lList1.add("50");
-    lList1.add("60");
-
-    CrunchifyLinkedList.Node reverseNode = CrunchifyLinkedList.reverseIterativeWay(lList1.getHead());
-    while (reverseNode != null) {
-      System.out.print("-->" + reverseNode.getData());
-      reverseNode = reverseNode.getNext();
-    }
-
-    System.out.println("\n\n*************Reversed Linked List Recursive Way ***********");
-
-    CrunchifyLinkedList lList2 = new CrunchifyLinkedList();
-
-    // add elements to LinkedList
-    lList2.add("10");
-    lList2.add("20");
-    lList2.add("30");
-    lList2.add("40");
-    lList2.add("50");
-    lList2.add("60");
-
-    CrunchifyLinkedList.Node reverseNode1 = CrunchifyLinkedList.reverseRecursiveWay(lList2.getHead());
-    while (reverseNode1 != null) {
-      System.out.print("-->" + reverseNode1.getData());
-      reverseNode1 = reverseNode1.getNext();
-    }
   }
 }
 
@@ -167,47 +132,6 @@ class CrunchifyLinkedList {
     kthNode.setNext(null);
 
     return head;
-  }
-
-  /**
-   * https://leetcode.com/problems/reverse-linked-list/
-   *
-   * Reverse a singly linked list.
-   *
-   * Example:
-   *
-   * Input: 1->2->3->4->5->NULL
-   * Output: 5->4->3->2->1->NULL
-   */
-  public static Node reverseIterativeWay(Node head) {
-    if (head == null) {
-      return head;
-    }
-
-    Node prevNode = null;
-    Node currNode = head;
-
-    while (null != currNode) {
-      Node nextNode = currNode.next;
-      currNode.next = prevNode;
-      prevNode = currNode;
-      currNode = nextNode;
-    }
-
-    return prevNode;
-  }
-
-  /**
-   * https://www.youtube.com/watch?v=MRe3UsRadKw
-   */
-  public static Node reverseRecursiveWay(Node head) {
-    if(head == null || head.next == null) {
-      return head;
-    }
-    Node prev = reverseRecursiveWay(head.next);
-    head.next.next = head;
-    head.next = null;
-    return prev;
   }
 
   public Object get(int index)

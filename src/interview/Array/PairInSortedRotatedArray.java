@@ -103,7 +103,7 @@ public class PairInSortedRotatedArray {
 
         // This condition is required to be checked, otherwise
         // l and r will cross each other and loop will never terminate.
-        if (l == (r - 1 + n) % n) {
+        if (l == (n + r - 1) % n) {
           return cnt;
         }
 

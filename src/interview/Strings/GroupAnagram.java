@@ -119,7 +119,9 @@ public class GroupAnagram {
     boolean isAnag = isAnagram("anagram", "gramana");
     System.out.println("IsAnagram " + isAnag);
 
-    groupAnagrams(new String[]{"aaa", "dog", "tac", "god", "act", "gdo"});
+    String[] input = {"aaa", "dog", "tac", "god", "act", "gdo"};
+    System.out.println("Before Anagram:: " + Arrays.toString(input));
+    groupAnagrams(input);
   }
 
   /**
@@ -179,6 +181,9 @@ public class GroupAnagram {
         map.put(ns, al);
       }
     }
+
+    /*List<List<String>> res = map.values().stream().filter(v -> v.size() > 1).collect(Collectors.toList());
+    System.out.println(res.toString());*/
 
     result.addAll(map.values());
     for (List<String> res : result) {

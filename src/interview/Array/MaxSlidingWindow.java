@@ -35,13 +35,13 @@ public class MaxSlidingWindow {
     for (int i = 0; i < n; ++i) {
 
       // Remove the elements which are out of this window
-      while ((!Qi.isEmpty()) && Qi.peek() <= i - k) {
+      while (!Qi.isEmpty() && Qi.peek() <= i - k) {
         Qi.removeFirst();
       }
 
       // Remove all elements smaller than the currently
       // being added element (remove useless elements)
-      while ((!Qi.isEmpty()) && arr[i] >= arr[Qi.peekLast()]) {
+      while (!Qi.isEmpty() && arr[i] >= arr[Qi.peekLast()]) {
         Qi.removeLast();
       }
 

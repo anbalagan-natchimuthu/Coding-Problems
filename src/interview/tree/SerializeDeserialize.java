@@ -46,7 +46,7 @@ public class SerializeDeserialize {
         queue.offer(root);
 
         while(!queue.isEmpty()) {
-            TreeNode curr = queue.poll();
+            TreeNode curr = queue.remove();
             if (curr != null) {
                 builder.append(curr.data + ",");
                 queue.offer(curr.left);

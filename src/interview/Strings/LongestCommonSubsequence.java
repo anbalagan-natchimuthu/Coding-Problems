@@ -160,6 +160,6 @@ public class LongestCommonSubsequence {
 
     System.out.println("Minimum Delete operation:" + lcs.minDistance("seau".toCharArray(), "eat".toCharArray()));
     System.out.println(
-        "Minimum operations (add, delete, update):" + lcs.minimumEdits("azced".toCharArray(), "abcdef".toCharArray()));
+        "Minimum operations (add, delete, update):" + lcs.minimumEdits("a".toCharArray(), "b".toCharArray()));
   }
 }

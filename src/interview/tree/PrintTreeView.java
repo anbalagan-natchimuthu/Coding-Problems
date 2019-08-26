@@ -10,7 +10,7 @@ import java.util.TreeMap;
  *
  */
 public class PrintTreeView {
-    static int  max_level = 0;
+
 
     public static void main(String[] args) {
         /* Create following Binary Tree For Left View
@@ -133,9 +133,12 @@ public class PrintTreeView {
             System.out.print(entry.getValue().getData() + " ");
         }
 
+        //treeMap.forEach((k, v) -> System.out.println(v.getData()));
+
         System.out.println();
     }
 
+    private static int  max_level = 0;
     private void leftView(Node root, int level) {
         // Base Case
         if (root == null) {

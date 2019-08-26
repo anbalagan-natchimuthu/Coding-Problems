@@ -24,11 +24,13 @@ public class LargestNumber {
       arr[i] = String.valueOf(nums[i]);
     }
 
-    Arrays.sort(arr, (a, b) -> {
+    /*Arrays.sort(arr, (a, b) -> {
       String order1 = a + b;
       String order2 = b + a;
       return order2.compareTo(order1);
-    });
+    });*/
+
+    Arrays.sort(arr, (a, b) -> (b+a).compareTo(a+b));
 
     if (arr[0].equals("0")) {
       return "0";
@@ -43,5 +45,7 @@ public class LargestNumber {
 
   public static void main(String[] args) {
     System.out.println(largestNumber(new int[]{3, 30, 34, 5, 9}));
+    System.out.println(largestNumber(new int[]{3, 0, 100}));
+    System.out.println(largestNumber(new int[]{0, 0}));
   }
 }

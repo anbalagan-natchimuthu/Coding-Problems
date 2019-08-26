@@ -62,15 +62,17 @@ public class ProductArray {
     public int[] productArraySolution2(int[] nums) {
         int[] result = new int[nums.length];
 
+        // result[i] holds product of all elements on right side of current element
         result[nums.length - 1] = 1;
         for (int i = nums.length - 2; i >= 0; i--) {
             result[i] = result[i + 1] * nums[i + 1];
         }
 
+        // left holds product of all elements on left side of current element
         int left = 1;
-        for (int i = 0; i < nums.length; i++) {
+        for (int i = 1; i < nums.length; i++) {
+            left = left * nums[i-1];
             result[i] = result[i] * left;
-            left = left * nums[i];
         }
 
         return result;
@@ -96,9 +98,13 @@ public class ProductArray {
         ProductArray pa = new ProductArray();
         int arr[] = { 10, 3, 5, 6, 2 };
         int n = arr.length;
-        System.out.println("The product array is : ");
+        System.out.println("The product array Solution 1 : ");
         pa.productArraySolution1(arr, n);
-        System.out.println("_______________");
+        System.out.println("\n_______________");
+
+        System.out.println("The product array Solution 2 : ");
+        System.out.println(Arrays.toString(pa.productArraySolution2(arr)) + "\n_______________");
+
         products(arr);
     }
 }

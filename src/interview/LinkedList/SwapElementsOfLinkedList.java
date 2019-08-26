@@ -1,5 +1,23 @@
 package interview.LinkedList;
 
+/**
+ * https://www.geeksforgeeks.org/swap-nodes-in-a-linked-list-without-swapping-data/
+ *
+ * Given a linked list and two keys in it, swap nodes for two given keys. Nodes should be swapped by changing links.
+ * Swapping data of nodes may be expensive in many situations when data contains many fields.
+ * It may be assumed that all keys in linked list are distinct.
+ *
+ * Examples:
+ *
+ * Input:  10->15->12->13->20->14,  x = 12, y = 20
+ * Output: 10->15->20->13->12->14
+ *
+ * Input:  10->15->12->13->20->14,  x = 10, y = 20
+ * Output: 20->15->12->13->10->14
+ *
+ * Input:  10->15->12->13->20->14,  x = 12, y = 13
+ * Output: 10->15->13->12->20->14
+ */
 public class SwapElementsOfLinkedList {
 
     public static void main(String[] args) {
@@ -22,55 +40,60 @@ public class SwapElementsOfLinkedList {
         n4.next = n5;
         n5.next = n6;
 
-        swapNodes(n1, 2, 5);
+        Node returnHead = swapNodes(n1, 2, 5);
+
+        while (returnHead != null) {
+            System.out.print(returnHead.data + "->");
+            returnHead = returnHead.next;
+        }
+
+
     }
 
-    private static void swapNodes(Node n1, int x, int y) {
+    private static Node swapNodes(Node n1, int x, int y) {
 
-        Node p1_prev = null;
-        Node p2_prev = null;
-        Node p1 = n1;
-        Node p2 = n1;
+        Node head = n1;
 
-        while (p1 != null) {
-            if (p1.next.data == x) {
-                p1_prev = p1;
-                p1 = p1.next;
-                break;
-            }
-            p1 = p1.next;
+        // Nothing to do if x and y are same
+        if (x == y) return null;
+
+        // Search for x (keep track of prevX and CurrX)
+        Node prevX = null, currX = head;
+        while (currX != null && currX.data != x)
+        {
+            prevX = currX;
+            currX = currX.next;
         }
 
-        while (p2 != null) {
-            if (p2.next.data == y) {
-                p2_prev = p2;
-                p2 = p2.next;
-                break;
-            }
-            p2 = p2.next;
+        // Search for y (keep track of prevY and currY)
+        Node prevY = null, currY = head;
+        while (currY != null && currY.data != y)
+        {
+            prevY = currY;
+            currY = currY.next;
         }
 
-        Node temp = p1;
-        p1 = p2;
-        p2 = temp;
+        // If either x or y is not present, nothing to do
+        if (currX == null || currY == null)
+            return null;
 
-        p1_prev.next = p2;
-        p1_prev.next.next = p2.next;
+        // If x is not head of linked list
+        if (prevX != null)
+            prevX.next = currY;
+        else //make y the new head
+            head = currY;
 
-        p2_prev.next = p1;
-        p2_prev.next.next = p1.next;
-        System.out.println("P1-->" + p1.data);
-        System.out.println("P2 " + p2.data);
+        // If y is not head of linked list
+        if (prevY != null)
+            prevY.next = currX;
+        else // make x the new head
+            head = currX;
 
-        while (n1 != null) {
-            if (n1.next != null && n1.next.data == x) {
-                n1.next = p2;
-            }
-            if (n1.next != null && n1.next.data == y) {
-                n1.next = p1;
-            }
-            System.out.println("N1 " + n1.data);
-            n1 = n1.next;
-        }
+        // Swap next pointers
+        Node temp = currX.next;
+        currX.next = currY.next;
+        currY.next = temp;
+
+        return head;
     }
 }

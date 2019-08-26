@@ -27,6 +27,7 @@ public class ThreeSumWithMultiplicity {
 
   public static void main(String[] args) {
     System.out.println(threeSumMulti(new int[]{1, 1, 2, 2, 3, 3, 4, 4, 5, 5}, 8));
+    System.out.println(threeSumMulti(new int[]{2, 2, 2, 2, 2}, 6));
   }
 
   public static int threeSumMulti(int[] A, int target) {

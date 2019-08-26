@@ -39,7 +39,7 @@ public class SortArrayWaveForm_ZigZagArray {
 
     System.out.println();
 
-    int[] arr1 = new int[]{10, 90, 49, 2, 1, 5, 23};
+    int[] arr1 = new int[]{10, 5, 6, 3, 2, 20, 100, 80};
     srwf.waveFormWithoutUsingSort(arr1);
     srwf.printArray(arr1);
   }
@@ -55,7 +55,7 @@ public class SortArrayWaveForm_ZigZagArray {
     int length = inputArray.length - 1;
     for (int i = 0; i < length; i += 2) {
       if (i > 0 && inputArray[i] < inputArray[i - 1]) {
-        swap(inputArray, i, i + 1);
+        swap(inputArray, i, i - 1);
       }
 
       if (i < length && inputArray[i] < inputArray[i + 1]) {

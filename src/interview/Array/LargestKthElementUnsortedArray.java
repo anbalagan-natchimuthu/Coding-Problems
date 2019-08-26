@@ -13,11 +13,13 @@ import java.util.Random;
  */
 public class LargestKthElementUnsortedArray {
 
+    private static Random random = new Random();
+
     public static void main(String[] args) {
         int[] input = { 3, 2, 1, 5, 6, 4 };
         System.out.println(KthLargestUsingSort(input, 3));
         System.out.println(KthLargestUsingMinHeap(input, 3));
-        System.out.println(findKthLargestUsingQuickSelect(input, 3));
+        System.out.println(findKthLargestUsingQuickSelect(new int[] {5, 1, 6, 7, 2, 9}, 4));
     }
 
     /**
@@ -63,26 +65,9 @@ public class LargestKthElementUnsortedArray {
         return getKth(nums.length - k, nums, 0, nums.length - 1);
     }
 
-    private static int partitionByRandomPivot(int arr[], int left, int right, int pivot) {
-        while (left <= right) {
-            while (arr[left] < pivot) {
-                left++;
-            }
-            while (arr[right] > pivot) {
-                right--;
-            }
-            if (left <= right) {
-                swap(arr, left, right);
-                left++;
-                right--;
-            }
-        }
-        return left;
-    }
-
     public static int getKth(int k, int[] nums, int start, int end) {
 
-        /*int pivot = nums[end];
+        int pivot = nums[end];
         int left = start;
         int right = end;
 
@@ -103,18 +88,14 @@ public class LargestKthElementUnsortedArray {
             swap(nums, left, right);
         }
 
-        swap(nums, left, end);*/
+        swap(nums, left, end);
 
-        int pivot = new Random().nextInt((end - start) + start);
-
-        int pivotIndex = partitionByRandomPivot(nums, start, end, nums[pivot]);
-
-        if (k == pivotIndex) {
-            return nums[k];
-        } else if (k < pivotIndex) {
-            return getKth(k, nums, start, pivotIndex - 1);
+        if (k == left) {
+            return pivot;
+        } else if (k < left) {
+            return getKth(k, nums, start, left - 1);
         } else {
-            return getKth(k, nums, pivotIndex + 1, end);
+            return getKth(k, nums, left + 1, end);
         }
     }
 

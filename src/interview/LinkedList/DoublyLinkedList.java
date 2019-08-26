@@ -9,40 +9,43 @@ public class DoublyLinkedList {
     public DoublyLinkedNode(int data) { this.data = data; }
   }
 
+  /**
+   * In doubly linked list, implement a method to insert a node at specified position and return the list's head.
+   * Do nothing if insertion position is outside the bounds of the list.
+   *
+   * insertAtPos(1<=>2<=>3,4,2) ==> 1<=>4<=>2<=>3
+   * insertAtPos(1,4,3) ==> 1
+   */
   public static DoublyLinkedNode insertAtPos(DoublyLinkedNode head, int data, int pos) {
 
-    if (head == null) {
-      if (pos == 1) {
-        head = new DoublyLinkedNode(data);
-      }
+    if (pos <1 || (head == null && pos >1)) {
       return head;
     }
 
-
-    DoublyLinkedNode current = head;
-    DoublyLinkedNode previous = null;
-    pos = pos -1;
-
-    while (current != null && pos > 0) {
-      previous = current;
-      current = current.next;
-      pos --;
-    }
-    if (pos == 0) {
-      DoublyLinkedNode node = new DoublyLinkedNode(data);
-      if (current != null) {
-        current.prev = node;
+    if (pos == 1) {
+      DoublyLinkedNode newNode = new DoublyLinkedNode(data);
+      newNode.next = head;
+      if (head != null) {
+        head.prev = newNode;
       }
-      node.prev = previous;
-      node.next = current;
-      if (previous != null) {
-        previous.next = node;
-      } else {
-        return node;
-      }
+      return newNode;
     }
 
-    return head;
+    int i = 1;
+    DoublyLinkedNode returnNode = head;
+    while (head != null) {
+      i++;
+      if (pos == i) {
+        DoublyLinkedNode newNode = new DoublyLinkedNode(data);
+        newNode.next = head.next;
+        head.next = newNode;
+        newNode.prev = head;
+        break;
+      }
+      head = head.next;
+    }
+
+    return returnNode;
 
   }
 

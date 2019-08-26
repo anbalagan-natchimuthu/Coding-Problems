@@ -11,8 +11,8 @@ import java.util.Set;
 public class LongestPalindromicSubstring {
 
   public static void main(String[] args) {
-    System.out.println("longestPalindrome:" + longestPalSubstring("abba"));
-    System.out.println("Length is: " + longestPalSubstrUsingDB("abba"));
+    System.out.println("longestPalindrome:" + longestPalSubstring("million"));
+    System.out.println("Length is: " + longestPalSubstrUsingDB("million"));
     System.out.println("longest Palindromic subsequence:" + longestPalindromicSubsequence("agbdba"));
 
     System.out.println("Count of Palindromic Substrings in a String::" + countPalindromicSubStrings("aaa"));
